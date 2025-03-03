@@ -1,0 +1,2979 @@
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+
+-- Create ScreenGui
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Name = "GUIEditorV2"
+
+-- Welcome Frame (Enhanced Design)
+local WelcomeFrame = Instance.new("Frame")
+WelcomeFrame.Size = UDim2.new(0.5, 0, 0.5, 0)
+WelcomeFrame.Position = UDim2.new(0.25, 0, 0.25, 0)
+WelcomeFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40) -- Dark modern background
+WelcomeFrame.BorderSizePixel = 0
+WelcomeFrame.Parent = ScreenGui
+
+local WelcomeCorner = Instance.new("UICorner")
+WelcomeCorner.CornerRadius = UDim.new(0, 12)
+WelcomeCorner.Parent = WelcomeFrame
+
+local WelcomeStroke = Instance.new("UIStroke")
+WelcomeStroke.Color = Color3.fromRGB(50, 50, 60)
+WelcomeStroke.Thickness = 2
+WelcomeStroke.Parent = WelcomeFrame
+
+local WelcomeText = Instance.new("TextLabel")
+WelcomeText.Size = UDim2.new(0.9, 0, 0.3, 0)
+WelcomeText.Position = UDim2.new(0.05, 0, 0.1, 0)
+WelcomeText.Text = "GUI Editor V2\nCreated by Grok 3 (xAI)"
+WelcomeText.TextColor3 = Color3.fromRGB(220, 220, 255) -- Light modern text
+WelcomeText.BackgroundTransparency = 1
+WelcomeText.TextScaled = true
+WelcomeText.Font = Enum.Font.GothamBold
+WelcomeText.Parent = WelcomeFrame
+
+local InfoText = Instance.new("TextLabel")
+InfoText.Size = UDim2.new(0.9, 0, 0.4, 0)
+InfoText.Position = UDim2.new(0.05, 0, 0.4, 0)
+InfoText.Text = "Click 'Start Editing' to begin.\nAdd elements with Toolbox.\nEdit properties with ease!"
+InfoText.TextColor3 = Color3.fromRGB(180, 180, 200)
+InfoText.BackgroundTransparency = 1
+InfoText.TextScaled = true
+InfoText.TextWrapped = true
+InfoText.Font = Enum.Font.Gotham
+InfoText.Parent = WelcomeFrame
+
+local StartButton = Instance.new("TextButton")
+StartButton.Size = UDim2.new(0.5, 0, 0.15, 0)
+StartButton.Position = UDim2.new(0.25, 0, 0.8, 0)
+StartButton.Text = "Start Editing"
+StartButton.TextScaled = true
+StartButton.BackgroundColor3 = Color3.fromRGB(80, 120, 255) -- Modern blue
+StartButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+StartButton.BorderSizePixel = 0
+StartButton.Font = Enum.Font.GothamBold
+StartButton.Parent = WelcomeFrame
+
+local StartCorner = Instance.new("UICorner")
+StartCorner.CornerRadius = UDim.new(0, 8)
+StartCorner.Parent = StartButton
+
+local StartStroke = Instance.new("UIStroke")
+StartStroke.Color = Color3.fromRGB(100, 140, 255)
+StartStroke.Thickness = 1
+StartStroke.Parent = StartButton
+
+-- Toolbox Frame (Left Side - Enhanced Design)
+local Toolbox = Instance.new("Frame")
+Toolbox.Size = UDim2.new(0.22, 0, 0.92, 0)
+Toolbox.Position = UDim2.new(0.02, 0, 0.04, 0)
+Toolbox.BackgroundColor3 = Color3.fromRGB(25, 25, 35) -- Dark sleek background
+Toolbox.BorderSizePixel = 0
+Toolbox.Visible = false
+Toolbox.Parent = ScreenGui
+
+local ToolboxCorner = Instance.new("UICorner")
+ToolboxCorner.CornerRadius = UDim.new(0, 10)
+ToolboxCorner.Parent = Toolbox
+
+local ToolboxStroke = Instance.new("UIStroke")
+ToolboxStroke.Color = Color3.fromRGB(45, 45, 55)
+ToolboxStroke.Thickness = 2
+ToolboxStroke.Parent = Toolbox
+
+local ToolboxTitle = Instance.new("TextLabel")
+ToolboxTitle.Size = UDim2.new(0.9, 0, 0.08, 0)
+ToolboxTitle.Position = UDim2.new(0.05, 0, 0.02, 0)
+ToolboxTitle.Text = "Toolbox"
+ToolboxTitle.TextColor3 = Color3.fromRGB(200, 200, 220)
+ToolboxTitle.BackgroundTransparency = 1
+ToolboxTitle.TextScaled = true
+ToolboxTitle.Font = Enum.Font.GothamBold
+ToolboxTitle.Parent = Toolbox
+
+-- Toolbox Buttons (Modernized)
+local ButtonsButton = Instance.new("TextButton")
+ButtonsButton.Size = UDim2.new(0.85, 0, 0.1, 0)
+ButtonsButton.Position = UDim2.new(0.075, 0, 0.12, 0)
+ButtonsButton.Text = "Buttons"
+ButtonsButton.BackgroundColor3 = Color3.fromRGB(50, 80, 200) -- Sleek blue
+ButtonsButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ButtonsButton.BorderSizePixel = 0
+ButtonsButton.Font = Enum.Font.Gotham
+ButtonsButton.TextScaled = true
+ButtonsButton.Parent = Toolbox
+
+local ButtonsCorner = Instance.new("UICorner")
+ButtonsCorner.CornerRadius = UDim.new(0, 6)
+ButtonsCorner.Parent = ButtonsButton
+
+local ButtonsStroke = Instance.new("UIStroke")
+ButtonsStroke.Color = Color3.fromRGB(70, 100, 220)
+ButtonsStroke.Thickness = 1
+ButtonsStroke.Parent = ButtonsButton
+
+local StartGuiButton = Instance.new("TextButton")
+StartGuiButton.Size = UDim2.new(0.85, 0, 0.1, 0)
+StartGuiButton.Position = UDim2.new(0.075, 0, 0.24, 0)
+StartGuiButton.Text = "StartGui"
+StartGuiButton.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+StartGuiButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+StartGuiButton.BorderSizePixel = 0
+StartGuiButton.Font = Enum.Font.Gotham
+StartGuiButton.TextScaled = true
+StartGuiButton.Parent = Toolbox
+
+local StartGuiCorner = Instance.new("UICorner")
+StartGuiCorner.CornerRadius = UDim.new(0, 6)
+StartGuiCorner.Parent = StartGuiButton
+
+local StartGuiStroke = Instance.new("UIStroke")
+StartGuiStroke.Color = Color3.fromRGB(70, 100, 220)
+StartGuiStroke.Thickness = 1
+StartGuiStroke.Parent = StartGuiButton
+
+local BindButtonToFrame = Instance.new("TextButton")
+BindButtonToFrame.Size = UDim2.new(0.85, 0, 0.1, 0)
+BindButtonToFrame.Position = UDim2.new(0.075, 0, 0.36, 0)
+BindButtonToFrame.Text = "Bind Button"
+BindButtonToFrame.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+BindButtonToFrame.TextColor3 = Color3.fromRGB(255, 255, 255)
+BindButtonToFrame.BorderSizePixel = 0
+BindButtonToFrame.Font = Enum.Font.Gotham
+BindButtonToFrame.TextScaled = true
+BindButtonToFrame.Parent = Toolbox
+
+local BindCorner = Instance.new("UICorner")
+BindCorner.CornerRadius = UDim.new(0, 6)
+BindCorner.Parent = BindButtonToFrame
+
+local BindStroke = Instance.new("UIStroke")
+BindStroke.Color = Color3.fromRGB(70, 100, 220)
+BindStroke.Thickness = 1
+BindStroke.Parent = BindButtonToFrame
+
+local CopyScript = Instance.new("TextButton")
+CopyScript.Size = UDim2.new(0.85, 0, 0.1, 0)
+CopyScript.Position = UDim2.new(0.075, 0, 0.48, 0)
+CopyScript.Text = "Copy Script"
+CopyScript.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+CopyScript.TextColor3 = Color3.fromRGB(255, 255, 255)
+CopyScript.BorderSizePixel = 0
+CopyScript.Font = Enum.Font.Gotham
+CopyScript.TextScaled = true
+CopyScript.Parent = Toolbox
+
+local CopyCorner = Instance.new("UICorner")
+CopyCorner.CornerRadius = UDim.new(0, 6)
+CopyCorner.Parent = CopyScript
+
+local CopyStroke = Instance.new("UIStroke")
+CopyStroke.Color = Color3.fromRGB(70, 100, 220)
+CopyStroke.Thickness = 1
+CopyStroke.Parent = CopyScript
+
+-- Properties Frame (Right Side - Enhanced Design)
+local Properties = Instance.new("Frame")
+Properties.Size = UDim2.new(0.28, 0, 0.92, 0)
+Properties.Position = UDim2.new(0.70, 0, 0.04, 0)
+Properties.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+Properties.BorderSizePixel = 0
+Properties.Visible = false
+Properties.Parent = ScreenGui
+
+local PropertiesCorner = Instance.new("UICorner")
+PropertiesCorner.CornerRadius = UDim.new(0, 10)
+PropertiesCorner.Parent = Properties
+
+local PropertiesStroke = Instance.new("UIStroke")
+PropertiesStroke.Color = Color3.fromRGB(45, 45, 55)
+PropertiesStroke.Thickness = 2
+PropertiesStroke.Parent = Properties
+
+local PropertiesTitle = Instance.new("TextLabel")
+PropertiesTitle.Size = UDim2.new(0.9, 0, 0.06, 0)
+PropertiesTitle.Position = UDim2.new(0.05, 0, 0.02, 0)
+PropertiesTitle.Text = "Properties"
+PropertiesTitle.TextColor3 = Color3.fromRGB(200, 200, 220)
+PropertiesTitle.BackgroundTransparency = 1
+PropertiesTitle.TextScaled = true
+PropertiesTitle.Font = Enum.Font.GothamBold
+PropertiesTitle.Parent = Properties
+
+-- Property Fields (Modernized Input Fields)
+local NameField = Instance.new("TextBox")
+NameField.Size = UDim2.new(0.9, 0, 0.06, 0)
+NameField.Position = UDim2.new(0.05, 0, 0.1, 0)
+NameField.Text = "Name"
+NameField.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+NameField.TextColor3 = Color3.fromRGB(220, 220, 255)
+NameField.BorderSizePixel = 0
+NameField.Font = Enum.Font.Gotham
+NameField.TextSize = 16
+NameField.Parent = Properties
+
+local NameCorner = Instance.new("UICorner")
+NameCorner.CornerRadius = UDim.new(0, 6)
+NameCorner.Parent = NameField
+
+local NameStroke = Instance.new("UIStroke")
+NameStroke.Color = Color3.fromRGB(60, 60, 70)
+NameStroke.Thickness = 1
+NameStroke.Parent = NameField
+
+local SizeX = Instance.new("TextBox")
+SizeX.Size = UDim2.new(0.42, 0, 0.06, 0)
+SizeX.Position = UDim2.new(0.05, 0, 0.18, 0)
+SizeX.Text = "Size X"
+SizeX.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+SizeX.TextColor3 = Color3.fromRGB(220, 220, 255)
+SizeX.BorderSizePixel = 0
+SizeX.Font = Enum.Font.Gotham
+SizeX.TextSize = 16
+SizeX.Parent = Properties
+
+local SizeXCorner = Instance.new("UICorner")
+SizeXCorner.CornerRadius = UDim.new(0, 6)
+SizeXCorner.Parent = SizeX
+
+local SizeXStroke = Instance.new("UIStroke")
+SizeXStroke.Color = Color3.fromRGB(60, 60, 70)
+SizeXStroke.Thickness = 1
+SizeXStroke.Parent = SizeX
+
+local SizeY = Instance.new("TextBox")
+SizeY.Size = UDim2.new(0.42, 0, 0.06, 0)
+SizeY.Position = UDim2.new(0.53, 0, 0.18, 0)
+SizeY.Text = "Size Y"
+SizeY.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+SizeY.TextColor3 = Color3.fromRGB(220, 220, 255)
+SizeY.BorderSizePixel = 0
+SizeY.Font = Enum.Font.Gotham
+SizeY.TextSize = 16
+SizeY.Parent = Properties
+
+local SizeYCorner = Instance.new("UICorner")
+SizeYCorner.CornerRadius = UDim.new(0, 6)
+SizeYCorner.Parent = SizeY
+
+local SizeYStroke = Instance.new("UIStroke")
+SizeYStroke.Color = Color3.fromRGB(60, 60, 70)
+SizeYStroke.Thickness = 1
+SizeYStroke.Parent = SizeY
+
+local ScaleX = Instance.new("TextBox")
+ScaleX.Size = UDim2.new(0.42, 0, 0.06, 0)
+ScaleX.Position = UDim2.new(0.05, 0, 0.26, 0)
+ScaleX.Text = "Scale X (%)"
+ScaleX.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+ScaleX.TextColor3 = Color3.fromRGB(220, 220, 255)
+ScaleX.BorderSizePixel = 0
+ScaleX.Font = Enum.Font.Gotham
+ScaleX.TextSize = 16
+ScaleX.Parent = Properties
+
+local ScaleXCorner = Instance.new("UICorner")
+ScaleXCorner.CornerRadius = UDim.new(0, 6)
+ScaleXCorner.Parent = ScaleX
+
+local ScaleXStroke = Instance.new("UIStroke")
+ScaleXStroke.Color = Color3.fromRGB(60, 60, 70)
+ScaleXStroke.Thickness = 1
+ScaleXStroke.Parent = ScaleX
+
+local ScaleY = Instance.new("TextBox")
+ScaleY.Size = UDim2.new(0.42, 0, 0.06, 0)
+ScaleY.Position = UDim2.new(0.53, 0, 0.26, 0)
+ScaleY.Text = "Scale Y (%)"
+ScaleY.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+ScaleY.TextColor3 = Color3.fromRGB(220, 220, 255)
+ScaleY.BorderSizePixel = 0
+ScaleY.Font = Enum.Font.Gotham
+ScaleY.TextSize = 16
+ScaleY.Parent = Properties
+
+local ScaleYCorner = Instance.new("UICorner")
+ScaleYCorner.CornerRadius = UDim.new(0, 6)
+ScaleYCorner.Parent = ScaleY
+
+local ScaleYStroke = Instance.new("UIStroke")
+ScaleYStroke.Color = Color3.fromRGB(60, 60, 70)
+ScaleYStroke.Thickness = 1
+ScaleYStroke.Parent = ScaleY
+
+-- Data Management
+local createdElements = {}
+local buttonBindings = {}
+local buttonScripts = {}
+local frameChildren = {}
+local selectedElement = nil
+local currentPopup = nil
+
+-- Dragging Functionality
+local function makeDraggable(obj)
+    local dragging = false
+    local dragInput
+    local dragStart
+    local startPos
+    local originalZIndex = obj.ZIndex
+    local gridSize = 0.05
+    
+    obj.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+           input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = obj.Position
+            obj.ZIndex = 10
+            
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                    obj.ZIndex = originalZIndex
+                end
+            end)
+        end
+    end)
+    
+    obj.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or 
+           input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+    
+    UserInputService.InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            local delta = input.Position - dragStart
+            local parentSize = obj.Parent:IsA("GuiObject") and obj.Parent.AbsoluteSize or ScreenGui.AbsoluteSize
+            local newX = startPos.X.Scale + (delta.X / parentSize.X)
+            local newY = startPos.Y.Scale + (delta.Y / parentSize.Y)
+            newX = math.floor(newX / gridSize + 0.5) * gridSize
+            newY = math.floor(newY / gridSize + 0.5) * gridSize
+            newX = math.clamp(newX, 0, 1 - obj.Size.X.Scale)
+            newY = math.clamp(newY, 0, 1 - obj.Size.Y.Scale)
+            obj.Position = UDim2.new(newX, 0, newY, 0)
+        end
+    end)
+end
+
+-- Hide All Popups Except Active (For Toolbox Popups Only)
+local function hideAllPopupsExcept(activePopup)
+    if currentPopup and currentPopup ~= activePopup then
+        currentPopup:Destroy()
+        currentPopup = nil
+    end
+end
+
+-- Hide Frame and Its Children
+local function hideFrameAndChildren(frame)
+    frame.Visible = false
+    if frameChildren[frame] then
+        for _, childFrame in pairs(frameChildren[frame]) do
+            childFrame.Visible = false
+        end
+    end
+end
+
+-- Property Fields (Continued - Modernized Input Fields)
+local ColorR = Instance.new("TextBox")
+ColorR.Size = UDim2.new(0.28, 0, 0.06, 0)
+ColorR.Position = UDim2.new(0.05, 0, 0.34, 0)
+ColorR.Text = "R (0-255)"
+ColorR.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+ColorR.TextColor3 = Color3.fromRGB(220, 220, 255)
+ColorR.BorderSizePixel = 0
+ColorR.Font = Enum.Font.Gotham
+ColorR.TextSize = 16
+ColorR.Parent = Properties
+
+local ColorRCorner = Instance.new("UICorner")
+ColorRCorner.CornerRadius = UDim.new(0, 6)
+ColorRCorner.Parent = ColorR
+
+local ColorRStroke = Instance.new("UIStroke")
+ColorRStroke.Color = Color3.fromRGB(60, 60, 70)
+ColorRStroke.Thickness = 1
+ColorRStroke.Parent = ColorR
+
+local ColorG = Instance.new("TextBox")
+ColorG.Size = UDim2.new(0.28, 0, 0.06, 0)
+ColorG.Position = UDim2.new(0.36, 0, 0.34, 0)
+ColorG.Text = "G (0-255)"
+ColorG.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+ColorG.TextColor3 = Color3.fromRGB(220, 220, 255)
+ColorG.BorderSizePixel = 0
+ColorG.Font = Enum.Font.Gotham
+ColorG.TextSize = 16
+ColorG.Parent = Properties
+
+local ColorGCorner = Instance.new("UICorner")
+ColorGCorner.CornerRadius = UDim.new(0, 6)
+ColorGCorner.Parent = ColorG
+
+local ColorGStroke = Instance.new("UIStroke")
+ColorGStroke.Color = Color3.fromRGB(60, 60, 70)
+ColorGStroke.Thickness = 1
+ColorGStroke.Parent = ColorG
+
+local ColorB = Instance.new("TextBox")
+ColorB.Size = UDim2.new(0.28, 0, 0.06, 0)
+ColorB.Position = UDim2.new(0.67, 0, 0.34, 0)
+ColorB.Text = "B (0-255)"
+ColorB.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+ColorB.TextColor3 = Color3.fromRGB(220, 220, 255)
+ColorB.BorderSizePixel = 0
+ColorB.Font = Enum.Font.Gotham
+ColorB.TextSize = 16
+ColorB.Parent = Properties
+
+local ColorBCorner = Instance.new("UICorner")
+ColorBCorner.CornerRadius = UDim.new(0, 6)
+ColorBCorner.Parent = ColorB
+
+local ColorBStroke = Instance.new("UIStroke")
+ColorBStroke.Color = Color3.fromRGB(60, 60, 70)
+ColorBStroke.Thickness = 1
+ColorBStroke.Parent = ColorB
+
+local UICornerToggle = Instance.new("TextButton")
+UICornerToggle.Size = UDim2.new(0.42, 0, 0.06, 0)
+UICornerToggle.Position = UDim2.new(0.05, 0, 0.42, 0)
+UICornerToggle.Text = "UICorner: Off"
+UICornerToggle.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+UICornerToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+UICornerToggle.BorderSizePixel = 0
+UICornerToggle.Font = Enum.Font.Gotham
+UICornerToggle.TextScaled = true
+UICornerToggle.Parent = Properties
+
+local UICornerToggleCorner = Instance.new("UICorner")
+UICornerToggleCorner.CornerRadius = UDim.new(0, 6)
+UICornerToggleCorner.Parent = UICornerToggle
+
+local UICornerToggleStroke = Instance.new("UIStroke")
+UICornerToggleStroke.Color = Color3.fromRGB(70, 100, 220)
+UICornerToggleStroke.Thickness = 1
+UICornerToggleStroke.Parent = UICornerToggle
+
+local CornerRadius = Instance.new("TextBox")
+CornerRadius.Size = UDim2.new(0.42, 0, 0.06, 0)
+CornerRadius.Position = UDim2.new(0.53, 0, 0.42, 0)
+CornerRadius.Text = "Radius (0-1)"
+CornerRadius.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+CornerRadius.TextColor3 = Color3.fromRGB(220, 220, 255)
+CornerRadius.BorderSizePixel = 0
+CornerRadius.Font = Enum.Font.Gotham
+CornerRadius.TextSize = 16
+CornerRadius.Parent = Properties
+
+local CornerRadiusCorner = Instance.new("UICorner")
+CornerRadiusCorner.CornerRadius = UDim.new(0, 6)
+CornerRadiusCorner.Parent = CornerRadius
+
+local CornerRadiusStroke = Instance.new("UIStroke")
+CornerRadiusStroke.Color = Color3.fromRGB(60, 60, 70)
+CornerRadiusStroke.Thickness = 1
+CornerRadiusStroke.Parent = CornerRadius
+
+local ScrollingToggle = Instance.new("TextButton")
+ScrollingToggle.Size = UDim2.new(0.42, 0, 0.06, 0)
+ScrollingToggle.Position = UDim2.new(0.05, 0, 0.50, 0)
+ScrollingToggle.Text = "Scrolling: Off"
+ScrollingToggle.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+ScrollingToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+ScrollingToggle.BorderSizePixel = 0
+ScrollingToggle.Font = Enum.Font.Gotham
+ScrollingToggle.TextScaled = true
+ScrollingToggle.Parent = Properties
+
+local ScrollingToggleCorner = Instance.new("UICorner")
+ScrollingToggleCorner.CornerRadius = UDim.new(0, 6)
+ScrollingToggleCorner.Parent = ScrollingToggle
+
+local ScrollingToggleStroke = Instance.new("UIStroke")
+ScrollingToggleStroke.Color = Color3.fromRGB(70, 100, 220)
+ScrollingToggleStroke.Thickness = 1
+ScrollingToggleStroke.Parent = ScrollingToggle
+
+local RotationField = Instance.new("TextBox")
+RotationField.Size = UDim2.new(0.42, 0, 0.06, 0)
+RotationField.Position = UDim2.new(0.53, 0, 0.50, 0)
+RotationField.Text = "Rotation (0-360)"
+RotationField.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+RotationField.TextColor3 = Color3.fromRGB(220, 220, 255)
+RotationField.BorderSizePixel = 0
+RotationField.Font = Enum.Font.Gotham
+RotationField.TextSize = 16
+RotationField.Parent = Properties
+
+local RotationCorner = Instance.new("UICorner")
+RotationCorner.CornerRadius = UDim.new(0, 6)
+RotationCorner.Parent = RotationField
+
+local RotationStroke = Instance.new("UIStroke")
+RotationStroke.Color = Color3.fromRGB(60, 60, 70)
+RotationStroke.Thickness = 1
+RotationStroke.Parent = RotationField
+
+local TextColorR = Instance.new("TextBox")
+TextColorR.Size = UDim2.new(0.28, 0, 0.06, 0)
+TextColorR.Position = UDim2.new(0.05, 0, 0.58, 0)
+TextColorR.Text = "Text R (0-255)"
+TextColorR.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+TextColorR.TextColor3 = Color3.fromRGB(220, 220, 255)
+TextColorR.BorderSizePixel = 0
+TextColorR.Font = Enum.Font.Gotham
+TextColorR.TextSize = 16
+TextColorR.Parent = Properties
+
+local TextColorRCorner = Instance.new("UICorner")
+TextColorRCorner.CornerRadius = UDim.new(0, 6)
+TextColorRCorner.Parent = TextColorR
+
+local TextColorRStroke = Instance.new("UIStroke")
+TextColorRStroke.Color = Color3.fromRGB(60, 60, 70)
+TextColorRStroke.Thickness = 1
+TextColorRStroke.Parent = TextColorR
+
+local TextColorG = Instance.new("TextBox")
+TextColorG.Size = UDim2.new(0.28, 0, 0.06, 0)
+TextColorG.Position = UDim2.new(0.36, 0, 0.58, 0)
+TextColorG.Text = "Text G (0-255)"
+TextColorG.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+TextColorG.TextColor3 = Color3.fromRGB(220, 220, 255)
+TextColorG.BorderSizePixel = 0
+TextColorG.Font = Enum.Font.Gotham
+TextColorG.TextSize = 16
+TextColorG.Parent = Properties
+
+local TextColorGCorner = Instance.new("UICorner")
+TextColorGCorner.CornerRadius = UDim.new(0, 6)
+TextColorGCorner.Parent = TextColorG
+
+local TextColorGStroke = Instance.new("UIStroke")
+TextColorGStroke.Color = Color3.fromRGB(60, 60, 70)
+TextColorGStroke.Thickness = 1
+TextColorGStroke.Parent = TextColorG
+
+local TextColorB = Instance.new("TextBox")
+TextColorB.Size = UDim2.new(0.28, 0, 0.06, 0)
+TextColorB.Position = UDim2.new(0.67, 0, 0.58, 0)
+TextColorB.Text = "Text B (0-255)"
+TextColorB.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+TextColorB.TextColor3 = Color3.fromRGB(220, 220, 255)
+TextColorB.BorderSizePixel = 0
+TextColorB.Font = Enum.Font.Gotham
+TextColorB.TextSize = 16
+TextColorB.Parent = Properties
+
+local TextColorBCorner = Instance.new("UICorner")
+TextColorBCorner.CornerRadius = UDim.new(0, 6)
+TextColorBCorner.Parent = TextColorB
+
+local TextColorBStroke = Instance.new("UIStroke")
+TextColorBStroke.Color = Color3.fromRGB(60, 60, 70)
+TextColorBStroke.Thickness = 1
+TextColorBStroke.Parent = TextColorB
+
+local TransparencyField = Instance.new("TextBox")
+TransparencyField.Size = UDim2.new(0.42, 0, 0.06, 0)
+TransparencyField.Position = UDim2.new(0.05, 0, 0.66, 0)
+TransparencyField.Text = "Transparency (0-1)"
+TransparencyField.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+TransparencyField.TextColor3 = Color3.fromRGB(220, 220, 255)
+TransparencyField.BorderSizePixel = 0
+TransparencyField.Font = Enum.Font.Gotham
+TransparencyField.TextSize = 16
+TransparencyField.Parent = Properties
+
+local TransparencyCorner = Instance.new("UICorner")
+TransparencyCorner.CornerRadius = UDim.new(0, 6)
+TransparencyCorner.Parent = TransparencyField
+
+local TransparencyStroke = Instance.new("UIStroke")
+TransparencyStroke.Color = Color3.fromRGB(60, 60, 70)
+TransparencyStroke.Thickness = 1
+TransparencyStroke.Parent = TransparencyField
+
+local ZIndexField = Instance.new("TextBox")
+ZIndexField.Size = UDim2.new(0.42, 0, 0.06, 0)
+ZIndexField.Position = UDim2.new(0.53, 0, 0.66, 0)
+ZIndexField.Text = "ZIndex"
+ZIndexField.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+ZIndexField.TextColor3 = Color3.fromRGB(220, 220, 255)
+ZIndexField.BorderSizePixel = 0
+ZIndexField.Font = Enum.Font.Gotham
+ZIndexField.TextSize = 16
+ZIndexField.Parent = Properties
+
+local ZIndexCorner = Instance.new("UICorner")
+ZIndexCorner.CornerRadius = UDim.new(0, 6)
+ZIndexCorner.Parent = ZIndexField
+
+local ZIndexStroke = Instance.new("UIStroke")
+ZIndexStroke.Color = Color3.fromRGB(60, 60, 70)
+ZIndexStroke.Thickness = 1
+ZIndexStroke.Parent = ZIndexField
+
+local TextSizeField = Instance.new("TextBox")
+TextSizeField.Size = UDim2.new(0.42, 0, 0.06, 0)
+TextSizeField.Position = UDim2.new(0.05, 0, 0.74, 0)
+TextSizeField.Text = "Text Size"
+TextSizeField.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+TextSizeField.TextColor3 = Color3.fromRGB(220, 220, 255)
+TextSizeField.BorderSizePixel = 0
+TextSizeField.Font = Enum.Font.Gotham
+TextSizeField.TextSize = 16
+TextSizeField.Parent = Properties
+
+local TextSizeCorner = Instance.new("UICorner")
+TextSizeCorner.CornerRadius = UDim.new(0, 6)
+TextSizeCorner.Parent = TextSizeField
+
+local TextSizeStroke = Instance.new("UIStroke")
+TextSizeStroke.Color = Color3.fromRGB(60, 60, 70)
+TextSizeStroke.Thickness = 1
+TextSizeStroke.Parent = TextSizeField
+
+local ImageField = Instance.new("TextBox")
+ImageField.Size = UDim2.new(0.9, 0, 0.06, 0)
+ImageField.Position = UDim2.new(0.05, 0, 0.82, 0)
+ImageField.Text = "Image URL"
+ImageField.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+ImageField.TextColor3 = Color3.fromRGB(220, 220, 255)
+ImageField.BorderSizePixel = 0
+ImageField.Font = Enum.Font.Gotham
+ImageField.TextSize = 16
+ImageField.Visible = false
+ImageField.Parent = Properties
+
+local ImageCorner = Instance.new("UICorner")
+ImageCorner.CornerRadius = UDim.new(0, 6)
+ImageCorner.Parent = ImageField
+
+local ImageStroke = Instance.new("UIStroke")
+ImageStroke.Color = Color3.fromRGB(60, 60, 70)
+ImageStroke.Thickness = 1
+ImageStroke.Parent = ImageField
+
+local ScriptField = Instance.new("TextBox")
+ScriptField.Size = UDim2.new(0.9, 0, 0.12, 0)
+ScriptField.Position = UDim2.new(0.05, 0, 0.77, 0)
+ScriptField.Text = "Enter Lua Script Here"
+ScriptField.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+ScriptField.TextColor3 = Color3.fromRGB(220, 220, 255)
+ScriptField.BorderSizePixel = 0
+ScriptField.TextWrapped = true
+ScriptField.TextScaled = false
+ScriptField.TextSize = 14
+ScriptField.ClearTextOnFocus = true
+ScriptField.Visible = false
+ScriptField.Parent = Properties
+
+local ScriptCorner = Instance.new("UICorner")
+ScriptCorner.CornerRadius = UDim.new(0, 6)
+ScriptCorner.Parent = ScriptField
+
+local ScriptStroke = Instance.new("UIStroke")
+ScriptStroke.Color = Color3.fromRGB(60, 60, 70)
+ScriptStroke.Thickness = 1
+ScriptStroke.Parent = ScriptField
+
+local DeleteElementButton = Instance.new("TextButton")
+DeleteElementButton.Size = UDim2.new(0.9, 0, 0.06, 0)
+DeleteElementButton.Position = UDim2.new(0.05, 0, 0.92, 0)
+DeleteElementButton.Text = "Delete Element"
+DeleteElementButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+DeleteElementButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+DeleteElementButton.BorderSizePixel = 0
+DeleteElementButton.Font = Enum.Font.GothamBold
+DeleteElementButton.TextScaled = true
+DeleteElementButton.Parent = Properties
+
+local DeleteCorner = Instance.new("UICorner")
+DeleteCorner.CornerRadius = UDim.new(0, 6)
+DeleteCorner.Parent = DeleteElementButton
+
+local DeleteStroke = Instance.new("UIStroke")
+DeleteStroke.Color = Color3.fromRGB(220, 70, 70)
+DeleteStroke.Thickness = 1
+DeleteStroke.Parent = DeleteElementButton
+
+-- Select Element
+local function selectElement(element)
+    selectedElement = element
+    Properties.Visible = true
+    for _, elem in pairs(createdElements) do
+        if elem ~= element then
+            elem.ZIndex = math.min(elem.ZIndex, 5)
+        end
+    end
+    element.ZIndex = 10
+    
+    if element:IsA("TextButton") then
+        NameField.Text = element.Text
+        TextColorR.Text = tostring(math.floor(element.TextColor3.R * 255))
+        TextColorG.Text = tostring(math.floor(element.TextColor3.G * 255))
+        TextColorB.Text = tostring(math.floor(element.TextColor3.B * 255))
+        TextSizeField.Text = tostring(element.TextSize)
+        ImageField.Visible = false
+        ScrollingToggle.Visible = false
+        ScriptField.Visible = true
+        ScriptField.Text = buttonScripts[element] or "Enter Lua Script Here"
+    elseif element:IsA("Frame") or element:IsA("ScrollingFrame") then
+        NameField.Text = element.Name
+        TextColorR.Text = "N/A"
+        TextColorG.Text = "N/A"
+        TextColorB.Text = "N/A"
+        TextSizeField.Text = "N/A"
+        ImageField.Visible = false
+        ScrollingToggle.Visible = true
+        ScrollingToggle.Text = element:IsA("ScrollingFrame") and "Scrolling: On" or "Scrolling: Off"
+        ScriptField.Visible = false
+    elseif element:IsA("TextLabel") then
+        NameField.Text = element.Text
+        TextColorR.Text = tostring(math.floor(element.TextColor3.R * 255))
+        TextColorG.Text = tostring(math.floor(element.TextColor3.G * 255))
+        TextColorB.Text = tostring(math.floor(element.TextColor3.B * 255))
+        TextSizeField.Text = tostring(element.TextSize)
+        ImageField.Visible = false
+        ScrollingToggle.Visible = false
+        ScriptField.Visible = false
+    elseif element:IsA("ImageButton") then
+        NameField.Text = element.Name
+        TextColorR.Text = "N/A"
+        TextColorG.Text = "N/A"
+        TextColorB.Text = "N/A"
+        TextSizeField.Text = "N/A"
+        ImageField.Text = element.Image
+        ImageField.Visible = true
+        ScrollingToggle.Visible = false
+        ScriptField.Visible = true
+        ScriptField.Text = buttonScripts[element] or "Enter Lua Script Here"
+    elseif element:IsA("ImageLabel") then
+        NameField.Text = element.Name
+        TextColorR.Text = "N/A"
+        TextColorG.Text = "N/A"
+        TextColorB.Text = "N/A"
+        TextSizeField.Text = "N/A"
+        ImageField.Text = element.Image
+        ImageField.Visible = true
+        ScrollingToggle.Visible = false
+        ScriptField.Visible = false
+    end
+    SizeX.Text = tostring(element.Size.X.Scale)
+    SizeY.Text = tostring(element.Size.Y.Scale)
+    ScaleX.Text = tostring(math.floor(element.Size.X.Scale * 100))
+    ScaleY.Text = tostring(math.floor(element.Size.Y.Scale * 100))
+    ColorR.Text = tostring(math.floor(element.BackgroundColor3.R * 255))
+    ColorG.Text = tostring(math.floor(element.BackgroundColor3.G * 255))
+    ColorB.Text = tostring(math.floor(element.BackgroundColor3.B * 255))
+    TransparencyField.Text = tostring(element.BackgroundTransparency)
+    RotationField.Text = tostring(element.Rotation or 0)
+    ZIndexField.Text = tostring(element.ZIndex)
+    local uiCorner = element:FindFirstChild("UICorner")
+    if uiCorner then
+        UICornerToggle.Text = "UICorner: On"
+        CornerRadius.Text = tostring(uiCorner.CornerRadius.Scale)
+    else
+        UICornerToggle.Text = "UICorner: Off"
+        CornerRadius.Text = "0"
+    end
+end
+
+-- Parent Selection Popup (Enhanced Design)
+local function showParentSelectionPopup(elementType, callback)
+    hideAllPopupsExcept(nil)
+    local popup = Instance.new("Frame")
+    popup.Size = UDim2.new(0.35, 0, 0.45, 0)
+    popup.Position = UDim2.new(0.325, 0, 0.275, 0)
+    popup.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    popup.BorderSizePixel = 0
+    popup.Parent = ScreenGui
+    currentPopup = popup
+
+    local PopupCorner = Instance.new("UICorner")
+    PopupCorner.CornerRadius = UDim.new(0, 10)
+    PopupCorner.Parent = popup
+
+    local PopupStroke = Instance.new("UIStroke")
+    PopupStroke.Color = Color3.fromRGB(50, 50, 60)
+    PopupStroke.Thickness = 2
+    PopupStroke.Parent = popup
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(0.9, 0, 0.15, 0)
+    title.Position = UDim2.new(0.05, 0, 0.05, 0)
+    title.Text = "Select Parent for " .. elementType
+    title.TextColor3 = Color3.fromRGB(220, 220, 255)
+    title.BackgroundTransparency = 1
+    title.TextScaled = true
+    title.Font = Enum.Font.GothamBold
+    title.Parent = popup
+
+    local parentList = Instance.new("ScrollingFrame")
+    parentList.Size = UDim2.new(0.9, 0, 0.75, 0)
+    parentList.Position = UDim2.new(0.05, 0, 0.2, 0)
+    parentList.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+    parentList.BorderSizePixel = 0
+    parentList.ScrollBarThickness = 6
+    parentList.Parent = popup
+
+    local ListCorner = Instance.new("UICorner")
+    ListCorner.CornerRadius = UDim.new(0, 6)
+    ListCorner.Parent = parentList
+
+    local screenGuiOption = Instance.new("TextButton")
+    screenGuiOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+    screenGuiOption.Position = UDim2.new(0.075, 0, 0, 0)
+    screenGuiOption.Text = "ScreenGui"
+    screenGuiOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    screenGuiOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    screenGuiOption.BorderSizePixel = 0
+    screenGuiOption.Font = Enum.Font.Gotham
+    screenGuiOption.TextScaled = true
+    screenGuiOption.Parent = parentList
+
+    local ScreenGuiCorner = Instance.new("UICorner")
+    ScreenGuiCorner.CornerRadius = UDim.new(0, 6)
+    ScreenGuiCorner.Parent = screenGuiOption
+
+    local ScreenGuiStroke = Instance.new("UIStroke")
+    ScreenGuiStroke.Color = Color3.fromRGB(70, 100, 220)
+    ScreenGuiStroke.Thickness = 1
+    ScreenGuiStroke.Parent = screenGuiOption
+
+    screenGuiOption.MouseButton1Click:Connect(function()
+        callback(ScreenGui)
+        popup:Destroy()
+        currentPopup = nil
+    end)
+
+    local frames = {}
+    for i, element in pairs(createdElements) do
+        if element:IsA("Frame") or element:IsA("ScrollingFrame") then
+            table.insert(frames, element)
+            local frameOption = Instance.new("TextButton")
+            frameOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+            frameOption.Position = UDim2.new(0.075, 0, 0.15 * i, 0)
+            frameOption.Text = element.Name
+            frameOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+            frameOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+            frameOption.BorderSizePixel = 0
+            frameOption.Font = Enum.Font.Gotham
+            frameOption.TextScaled = true
+            frameOption.Parent = parentList
+
+            local FrameCorner = Instance.new("UICorner")
+            FrameCorner.CornerRadius = UDim.new(0, 6)
+            FrameCorner.Parent = frameOption
+
+            local FrameStroke = Instance.new("UIStroke")
+            FrameStroke.Color = Color3.fromRGB(70, 100, 220)
+            FrameStroke.Thickness = 1
+            FrameStroke.Parent = frameOption
+
+            frameOption.MouseButton1Click:Connect(function()
+                callback(element)
+                popup:Destroy()
+                currentPopup = nil
+            end)
+        end
+    end
+    
+    return popup
+end
+
+-- Buttons Popup (Enhanced Design)
+local function showButtonsPopup()
+    if currentPopup and currentPopup.Name == "ButtonsPopup" then
+        currentPopup:Destroy()
+        currentPopup = nil
+        return
+    end
+    hideAllPopupsExcept(nil)
+
+    local popup = Instance.new("Frame")
+    popup.Size = UDim2.new(0.35, 0, 0.55, 0)
+    popup.Position = UDim2.new(0.325, 0, 0.225, 0)
+    popup.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    popup.BorderSizePixel = 0
+    popup.Name = "ButtonsPopup"
+    popup.Parent = ScreenGui
+    currentPopup = popup
+
+    local PopupCorner = Instance.new("UICorner")
+    PopupCorner.CornerRadius = UDim.new(0, 10)
+    PopupCorner.Parent = popup
+
+    local PopupStroke = Instance.new("UIStroke")
+    PopupStroke.Color = Color3.fromRGB(50, 50, 60)
+    PopupStroke.Thickness = 2
+    PopupStroke.Parent = popup
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(0.9, 0, 0.15, 0)
+    title.Position = UDim2.new(0.05, 0, 0.05, 0)
+    title.Text = "Add Element"
+    title.TextColor3 = Color3.fromRGB(220, 220, 255)
+    title.BackgroundTransparency = 1
+    title.TextScaled = true
+    title.Font = Enum.Font.GothamBold
+    title.Parent = popup
+
+    local textButtonOption = Instance.new("TextButton")
+    textButtonOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+    textButtonOption.Position = UDim2.new(0.075, 0, 0.25, 0)
+    textButtonOption.Text = "TextButton"
+    textButtonOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    textButtonOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textButtonOption.BorderSizePixel = 0
+    textButtonOption.Font = Enum.Font.Gotham
+    textButtonOption.TextScaled = true
+    textButtonOption.Parent = popup
+
+    local TextButtonCorner = Instance.new("UICorner")
+    TextButtonCorner.CornerRadius = UDim.new(0, 6)
+    TextButtonCorner.Parent = textButtonOption
+
+    local TextButtonStroke = Instance.new("UIStroke")
+    TextButtonStroke.Color = Color3.fromRGB(70, 100, 220)
+    TextButtonStroke.Thickness = 1
+    TextButtonStroke.Parent = textButtonOption
+
+    local imageButtonOption = Instance.new("TextButton")
+    imageButtonOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+    imageButtonOption.Position = UDim2.new(0.075, 0, 0.42, 0)
+    imageButtonOption.Text = "ImageButton"
+    imageButtonOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    imageButtonOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    imageButtonOption.BorderSizePixel = 0
+    imageButtonOption.Font = Enum.Font.Gotham
+    imageButtonOption.TextScaled = true
+    imageButtonOption.Parent = popup
+
+    local ImageButtonCorner = Instance.new("UICorner")
+    ImageButtonCorner.CornerRadius = UDim.new(0, 6)
+    ImageButtonCorner.Parent = imageButtonOption
+
+    local ImageButtonStroke = Instance.new("UIStroke")
+    ImageButtonStroke.Color = Color3.fromRGB(70, 100, 220)
+    ImageButtonStroke.Thickness = 1
+    ImageButtonStroke.Parent = imageButtonOption
+
+    local textLabelOption = Instance.new("TextButton")
+    textLabelOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+    textLabelOption.Position = UDim2.new(0.075, 0, 0.59, 0)
+    textLabelOption.Text = "TextLabel"
+    textLabelOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    textLabelOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabelOption.BorderSizePixel = 0
+    textLabelOption.Font = Enum.Font.Gotham
+    textLabelOption.TextScaled = true
+    textLabelOption.Parent = popup
+
+    local TextLabelCorner = Instance.new("UICorner")
+    TextLabelCorner.CornerRadius = UDim.new(0, 6)
+    TextLabelCorner.Parent = textLabelOption
+
+    local TextLabelStroke = Instance.new("UIStroke")
+    TextLabelStroke.Color = Color3.fromRGB(70, 100, 220)
+    TextLabelStroke.Thickness = 1
+    TextLabelStroke.Parent = textLabelOption
+
+    local imageLabelOption = Instance.new("TextButton")
+    imageLabelOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+    imageLabelOption.Position = UDim2.new(0.075, 0, 0.76, 0)
+    imageLabelOption.Text = "ImageLabel"
+    imageLabelOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    imageLabelOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    imageLabelOption.BorderSizePixel = 0
+    imageLabelOption.Font = Enum.Font.Gotham
+    imageLabelOption.TextScaled = true
+    imageLabelOption.Parent = popup
+
+    local ImageLabelCorner = Instance.new("UICorner")
+    ImageLabelCorner.CornerRadius = UDim.new(0, 6)
+    ImageLabelCorner.Parent = imageLabelOption
+
+    local ImageLabelStroke = Instance.new("UIStroke")
+    ImageLabelStroke.Color = Color3.fromRGB(70, 100, 220)
+    ImageLabelStroke.Thickness = 1
+    ImageLabelStroke.Parent = imageLabelOption
+
+    textButtonOption.MouseButton1Click:Connect(function()
+        local parentPopup = showParentSelectionPopup("TextButton", function(parent)
+            local newButton = Instance.new("TextButton")
+            newButton.Size = UDim2.new(0.3, 0, 0.15, 0)
+            newButton.Position = UDim2.new(0.2, 0, 0.3, 0)
+            newButton.Text = "New Button"
+            newButton.ZIndex = 2
+            newButton.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+            newButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            newButton.TextSize = 14
+            newButton.Parent = parent
+            table.insert(createdElements, newButton)
+            makeDraggable(newButton)
+            
+            newButton.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                   input.UserInputType == Enum.UserInputType.Touch then
+                    selectElement(newButton)
+                end
+            end)
+            
+            newButton.MouseButton1Click:Connect(function()
+                local scriptCode = buttonScripts[newButton]
+                if scriptCode and scriptCode ~= "Enter Lua Script Here" and scriptCode ~= "" then
+                    local func, err = loadstring(scriptCode)
+                    if func then
+                        pcall(func)
+                    else
+                        warn("Error in script: " .. err)
+                    end
+                end
+            end)
+        end)
+        popup:Destroy()
+        currentPopup = parentPopup
+    end)
+
+    imageButtonOption.MouseButton1Click:Connect(function()
+        local parentPopup = showParentSelectionPopup("ImageButton", function(parent)
+            local newImageButton = Instance.new("ImageButton")
+            newImageButton.Size = UDim2.new(0.4, 0, 0.4, 0)
+            newImageButton.Position = UDim2.new(0.2, 0, 0.3, 0)
+            newImageButton.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+            newImageButton.Image = "rbxassetid://123456"
+            newImageButton.ZIndex = 2
+            newImageButton.Parent = parent
+            table.insert(createdElements, newImageButton)
+            makeDraggable(newImageButton)
+            
+            newImageButton.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                   input.UserInputType == Enum.UserInputType.Touch then
+                    selectElement(newImageButton)
+                end
+            end)
+            
+            newImageButton.MouseButton1Click:Connect(function()
+                local scriptCode = buttonScripts[newImageButton]
+                if scriptCode and scriptCode ~= "Enter Lua Script Here" and scriptCode ~= "" then
+                    local func, err = loadstring(scriptCode)
+                    if func then
+                        pcall(func)
+                    else
+                        warn("Error in script: " .. err)
+                    end
+                end
+            end)
+        end)
+        popup:Destroy()
+        currentPopup = parentPopup
+    end)
+
+    textLabelOption.MouseButton1Click:Connect(function()
+        local parentPopup = showParentSelectionPopup("TextLabel", function(parent)
+            local newTextLabel = Instance.new("TextLabel")
+            newTextLabel.Size = UDim2.new(0.4, 0, 0.2, 0)
+            newTextLabel.Position = UDim2.new(0.2, 0, 0.3, 0)
+            newTextLabel.Text = "New TextLabel"
+            newTextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            newTextLabel.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+            newTextLabel.TextSize = 18
+            newTextLabel.ZIndex = 2
+            newTextLabel.Parent = parent
+            table.insert(createdElements, newTextLabel)
+            makeDraggable(newTextLabel)
+            
+            newTextLabel.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                   input.UserInputType == Enum.UserInputType.Touch then
+                    selectElement(newTextLabel)
+                end
+            end)
+            if parent:IsA("Frame") or parent:IsA("ScrollingFrame") then
+                parent.Active = false
+            end
+        end)
+        popup:Destroy()
+        currentPopup = parentPopup
+    end)
+
+    imageLabelOption.MouseButton1Click:Connect(function()
+        local parentPopup = showParentSelectionPopup("ImageLabel", function(parent)
+            local newImageLabel = Instance.new("ImageLabel")
+            newImageLabel.Size = UDim2.new(0.4, 0, 0.4, 0)
+            newImageLabel.Position = UDim2.new(0.2, 0, 0.3, 0)
+            newImageLabel.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+            newImageLabel.Image = "rbxassetid://123456"
+            newImageLabel.ZIndex = 2
+            newImageLabel.Parent = parent
+            table.insert(createdElements, newImageLabel)
+            makeDraggable(newImageLabel)
+            
+            newImageLabel.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                   input.UserInputType == Enum.UserInputType.Touch then
+                    selectElement(newImageLabel)
+                end
+            end)
+        end)
+        popup:Destroy()
+        currentPopup = parentPopup
+    end)
+end
+
+-- StartGui Popup (Enhanced Design)
+local function showStartGuiPopup()
+    if currentPopup and currentPopup.Name == "StartGuiPopup" then
+        currentPopup:Destroy()
+        currentPopup = nil
+        return
+    end
+    hideAllPopupsExcept(nil)
+
+    local popup = Instance.new("Frame")
+    popup.Size = UDim2.new(0.35, 0, 0.35, 0)
+    popup.Position = UDim2.new(0.325, 0, 0.325, 0)
+    popup.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    popup.BorderSizePixel = 0
+    popup.Name = "StartGuiPopup"
+    popup.Parent = ScreenGui
+    currentPopup = popup
+
+    local PopupCorner = Instance.new("UICorner")
+    PopupCorner.CornerRadius = UDim.new(0, 10)
+    PopupCorner.Parent = popup
+
+    local PopupStroke = Instance.new("UIStroke")
+    PopupStroke.Color = Color3.fromRGB(50, 50, 60)
+    PopupStroke.Thickness = 2
+    PopupStroke.Parent = popup
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(0.9, 0, 0.2, 0)
+    title.Position = UDim2.new(0.05, 0, 0.05, 0)
+    title.Text = "Select Parent:"
+    title.TextColor3 = Color3.fromRGB(220, 220, 255)
+    title.BackgroundTransparency = 1
+    title.TextScaled = true
+    title.Font = Enum.Font.GothamBold
+    title.Parent = popup
+
+    local screenGuiOption = Instance.new("TextButton")
+    screenGuiOption.Size = UDim2.new(0.85, 0, 0.25, 0)
+    screenGuiOption.Position = UDim2.new(0.075, 0, 0.35, 0)
+    screenGuiOption.Text = "ScreenGui"
+    screenGuiOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    screenGuiOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    screenGuiOption.BorderSizePixel = 0
+    screenGuiOption.Font = Enum.Font.Gotham
+    screenGuiOption.TextScaled = true
+    screenGuiOption.Parent = popup
+
+    local ScreenGuiCorner = Instance.new("UICorner")
+    ScreenGuiCorner.CornerRadius = UDim.new(0, 6)
+    ScreenGuiCorner.Parent = screenGuiOption
+
+    local ScreenGuiStroke = Instance.new("UIStroke")
+    ScreenGuiStroke.Color = Color3.fromRGB(70, 100, 220)
+    ScreenGuiStroke.Thickness = 1
+    ScreenGuiStroke.Parent = screenGuiOption
+
+    local coreGuiLabel = Instance.new("TextLabel")
+    coreGuiLabel.Size = UDim2.new(0.85, 0, 0.25, 0)
+    coreGuiLabel.Position = UDim2.new(0.075, 0, 0.65, 0)
+    coreGuiLabel.Text = "CoreGui <Coming>"
+    coreGuiLabel.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
+    coreGuiLabel.TextColor3 = Color3.fromRGB(180, 180, 200)
+    coreGuiLabel.BorderSizePixel = 0
+    coreGuiLabel.Font = Enum.Font.Gotham
+    coreGuiLabel.TextScaled = true
+    coreGuiLabel.Parent = popup
+
+    local CoreGuiCorner = Instance.new("UICorner")
+    CoreGuiCorner.CornerRadius = UDim.new(0, 6)
+    CoreGuiCorner.Parent = coreGuiLabel
+
+    local CoreGuiStroke = Instance.new("UIStroke")
+    CoreGuiStroke.Color = Color3.fromRGB(80, 80, 90)
+    CoreGuiStroke.Thickness = 1
+    CoreGuiStroke.Parent = coreGuiLabel
+
+    screenGuiOption.MouseButton1Click:Connect(function()
+        local newFrame = Instance.new("Frame")
+        newFrame.Size = UDim2.new(0.6, 0, 0.6, 0)
+        newFrame.Position = UDim2.new(0.2, 0, 0.3, 0)
+        newFrame.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+        newFrame.ZIndex = 1
+        newFrame.Parent = ScreenGui
+        table.insert(createdElements, newFrame)
+        makeDraggable(newFrame)
+        
+        newFrame.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+               input.UserInputType == Enum.UserInputType.Touch then
+                selectElement(newFrame)
+            end
+        end)
+        popup:Destroy()
+        currentPopup = nil
+    end)
+end
+
+-- Bind Button to Frame Popup (Enhanced Design)
+local function showBindButtonToFramePopup(button)
+    if currentPopup and currentPopup.Name == "BindPopup" then
+        currentPopup:Destroy()
+        currentPopup = nil
+        return
+    end
+    hideAllPopupsExcept(nil)
+
+    local popup = Instance.new("Frame")
+    popup.Size = UDim2.new(0.35, 0, 0.35, 0)
+    popup.Position = UDim2.new(0.325, 0, 0.325, 0)
+    popup.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    popup.BorderSizePixel = 0
+    popup.Name = "BindPopup"
+    popup.Parent = ScreenGui
+    currentPopup = popup
+
+    local PopupCorner = Instance.new("UICorner")
+    PopupCorner.CornerRadius = UDim.new(0, 10)
+    PopupCorner.Parent = popup
+
+    local PopupStroke = Instance.new("UIStroke")
+    PopupStroke.Color = Color3.fromRGB(50, 50, 60)
+    PopupStroke.Thickness = 2
+    PopupStroke.Parent = popup
+
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(0.9, 0, 0.2, 0)
+    label.Position = UDim2.new(0.05, 0, 0.05, 0)
+    label.Text = "Select Frame to Bind:"
+    label.TextColor3 = Color3.fromRGB(220, 220, 255)
+    label.BackgroundTransparency = 1
+    label.Font = Enum.Font.GothamBold
+    label.TextScaled = true
+    label.Parent = popup
+
+    local framesList = Instance.new("ScrollingFrame")
+    framesList.Size = UDim2.new(0.9, 0, 0.7, 0)
+    framesList.Position = UDim2.new(0.05, 0, 0.25, 0)
+    framesList.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+    framesList.BorderSizePixel = 0
+    framesList.ScrollBarThickness = 6
+    framesList.Parent = popup
+
+    local ListCorner = Instance.new("UICorner")
+    ListCorner.CornerRadius = UDim.new(0, 6)
+    ListCorner.Parent = framesList
+
+    local frames = {}
+    for _, element in pairs(createdElements) do
+        if element:IsA("Frame") or element:IsA("ScrollingFrame") then
+            table.insert(frames, element)
+        end
+    end
+
+    for i, frame in pairs(frames) do
+        local frameButton = Instance.new("TextButton")
+        frameButton.Size = UDim2.new(0.85, 0, 0.1, 0)
+        frameButton.Position = UDim2.new(0.075, 0, 0.1 * (i - 1), 0)
+        frameButton.Text = frame.Name
+        frameButton.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+        frameButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        frameButton.BorderSizePixel = 0
+        frameButton.Font = Enum.Font.Gotham
+        frameButton.TextScaled = true
+        frameButton.Parent = framesList
+
+        local FrameCorner = Instance.new("UICorner")
+        FrameCorner.CornerRadius = UDim.new(0, 6)
+        FrameCorner.Parent = frameButton
+
+        local FrameStroke = Instance.new("UIStroke")
+        FrameStroke.Color = Color3.fromRGB(70, 100, 220)
+        FrameStroke.Thickness = 1
+        FrameStroke.Parent = frameButton
+
+        frameButton.MouseButton1Click:Connect(function()
+            for _, connection in pairs(getconnections(button.MouseButton1Click)) do
+                connection:Disconnect()
+            end
+            buttonBindings[button] = frame
+            frame.Visible = false
+
+            local parentFrame = button.Parent
+            while parentFrame and not (parentFrame:IsA("Frame") or parentFrame:IsA("ScrollingFrame")) do
+                parentFrame = parentFrame.Parent
+            end
+            if parentFrame and (parentFrame:IsA("Frame") or parentFrame:IsA("ScrollingFrame")) then
+                if not frameChildren[parentFrame] then
+                    frameChildren[parentFrame] = {}
+                end
+                table.insert(frameChildren[parentFrame], frame)
+            end
+
+            button.MouseButton1Click:Connect(function()
+                if frame.Visible then
+                    hideFrameAndChildren(frame)
+                else
+                    frame.Visible = true
+                end
+                local scriptCode = buttonScripts[button]
+                if scriptCode and scriptCode ~= "Enter Lua Script Here" and scriptCode ~= "" then
+                    local func, err = loadstring(scriptCode)
+                    if func then
+                        pcall(func)
+                    else
+                        warn("Error in script: " .. err)
+                    end
+                end
+            end)
+            popup:Destroy()
+            currentPopup = nil
+        end)
+    end
+end
+
+-- Toolbox Button Connections
+ButtonsButton.MouseButton1Click:Connect(showButtonsPopup)
+StartGuiButton.MouseButton1Click:Connect(showStartGuiPopup)
+BindButtonToFrame.MouseButton1Click:Connect(function()
+    if selectedElement and selectedElement:IsA("TextButton") then
+        showBindButtonToFramePopup(selectedElement)
+    else
+        warn("Please select a button first!")
+    end
+end)
+
+-- Delete Element Functionality
+DeleteElementButton.MouseButton1Click:Connect(function()
+    if selectedElement then
+        local index = table.find(createdElements, selectedElement)
+        if index then
+            table.remove(createdElements, index)
+            if buttonBindings[selectedElement] then
+                buttonBindings[selectedElement] = nil
+            end
+            if buttonScripts[selectedElement] then
+                buttonScripts[selectedElement] = nil
+            end
+            if frameChildren[selectedElement] then
+                frameChildren[selectedElement] = nil
+            end
+            for _, frames in pairs(frameChildren) do
+                local childIndex = table.find(frames, selectedElement)
+                if childIndex then
+                    table.remove(frames, childIndex)
+                end
+            end
+            selectedElement:Destroy()
+            selectedElement = nil
+            Properties.Visible = false
+        end
+    end
+end)
+
+-- Property Updates
+NameField.FocusLost:Connect(function()
+    if selectedElement then
+        if selectedElement:IsA("TextButton") or selectedElement:IsA("TextLabel") then
+            selectedElement.Text = NameField.Text
+        else
+            selectedElement.Name = NameField.Text
+        end
+    end
+end)
+
+SizeX.FocusLost:Connect(function()
+    if selectedElement then
+        local newX = tonumber(SizeX.Text) or selectedElement.Size.X.Scale
+        selectedElement.Size = UDim2.new(newX, 0, selectedElement.Size.Y.Scale, 0)
+        ScaleX.Text = tostring(math.floor(newX * 100))
+    end
+end)
+
+SizeY.FocusLost:Connect(function()
+    if selectedElement then
+        local newY = tonumber(SizeY.Text) or selectedElement.Size.Y.Scale
+        selectedElement.Size = UDim2.new(selectedElement.Size.X.Scale, 0, newY, 0)
+        ScaleY.Text = tostring(math.floor(newY * 100))
+    end
+end)
+
+ScaleX.FocusLost:Connect(function()
+    if selectedElement then
+        local newScaleX = tonumber(ScaleX.Text) or (selectedElement.Size.X.Scale * 100)
+        newScaleX = math.clamp(newScaleX, 0, 1000) / 100
+        selectedElement.Size = UDim2.new(newScaleX, 0, selectedElement.Size.Y.Scale, 0)
+        SizeX.Text = tostring(newScaleX)
+    end
+end)
+
+ScaleY.FocusLost:Connect(function()
+    if selectedElement then
+        local newScaleY = tonumber(ScaleY.Text) or (selectedElement.Size.Y.Scale * 100)
+        newScaleY = math.clamp(newScaleY, 0, 1000) / 100
+        selectedElement.Size = UDim2.new(selectedElement.Size.X.Scale, 0, newScaleY, 0)
+        SizeY.Text = tostring(newScaleY)
+    end
+end)
+
+ColorR.FocusLost:Connect(function()
+    if selectedElement then
+        local r = tonumber(ColorR.Text) or (selectedElement.BackgroundColor3.R * 255)
+        local g = tonumber(ColorG.Text) or (selectedElement.BackgroundColor3.G * 255)
+        local b = tonumber(ColorB.Text) or (selectedElement.BackgroundColor3.B * 255)
+        r = math.clamp(r, 0, 255)
+        selectedElement.BackgroundColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+ColorG.FocusLost:Connect(function()
+    if selectedElement then
+        local r = tonumber(ColorR.Text) or (selectedElement.BackgroundColor3.R * 255)
+        local g = tonumber(ColorG.Text) or (selectedElement.BackgroundColor3.G * 255)
+        local b = tonumber(ColorB.Text) or (selectedElement.BackgroundColor3.B * 255)
+        g = math.clamp(g, 0, 255)
+        selectedElement.BackgroundColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+ColorB.FocusLost:Connect(function()
+    if selectedElement then
+        local r = tonumber(ColorR.Text) or (selectedElement.BackgroundColor3.R * 255)
+        local g = tonumber(ColorG.Text) or (selectedElement.BackgroundColor3.G * 255)
+        local b = tonumber(ColorB.Text) or (selectedElement.BackgroundColor3.B * 255)
+        b = math.clamp(b, 0, 255)
+        selectedElement.BackgroundColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+TextColorR.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("TextButton") or selectedElement:IsA("TextLabel")) then
+        local r = tonumber(TextColorR.Text) or (selectedElement.TextColor3.R * 255)
+        local g = tonumber(TextColorG.Text) or (selectedElement.TextColor3.G * 255)
+        local b = tonumber(TextColorB.Text) or (selectedElement.TextColor3.B * 255)
+        r = math.clamp(r, 0, 255)
+        selectedElement.TextColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+TextColorG.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("TextButton") or selectedElement:IsA("TextLabel")) then
+        local r = tonumber(TextColorR.Text) or (selectedElement.TextColor3.R * 255)
+        local g = tonumber(TextColorG.Text) or (selectedElement.TextColor3.G * 255)
+        local b = tonumber(TextColorB.Text) or (selectedElement.TextColor3.B * 255)
+        g = math.clamp(g, 0, 255)
+        selectedElement.TextColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+TextColorB.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("TextButton") or selectedElement:IsA("TextLabel")) then
+        local r = tonumber(TextColorR.Text) or (selectedElement.TextColor3.R * 255)
+        local g = tonumber(TextColorG.Text) or (selectedElement.TextColor3.G * 255)
+        local b = tonumber(TextColorB.Text) or (selectedElement.TextColor3.B * 255)
+        b = math.clamp(b, 0, 255)
+        selectedElement.TextColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+TransparencyField.FocusLost:Connect(function()
+    if selectedElement then
+        local transparency = tonumber(TransparencyField.Text) or selectedElement.BackgroundTransparency
+        transparency = math.clamp(transparency, 0, 1)
+        selectedElement.BackgroundTransparency = transparency
+    end
+end)
+
+ZIndexField.FocusLost:Connect(function()
+    if selectedElement then
+        local zIndex = tonumber(ZIndexField.Text) or selectedElement.ZIndex
+        zIndex = math.clamp(zIndex, -100, 100)
+        selectedElement.ZIndex = zIndex
+    end
+end)
+
+TextSizeField.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("TextButton") or selectedElement:IsA("TextLabel")) then
+        local textSize = tonumber(TextSizeField.Text) or selectedElement.TextSize
+        textSize = math.clamp(textSize, 1, 100)
+        selectedElement.TextSize = textSize
+        selectedElement.TextScaled = false
+    end
+end)
+
+UICornerToggle.MouseButton1Click:Connect(function()
+    if selectedElement then
+        local uiCorner = selectedElement:FindFirstChild("UICorner")
+        if uiCorner then
+            uiCorner:Destroy()
+            UICornerToggle.Text = "UICorner: Off"
+            CornerRadius.Text = "0"
+        else
+            uiCorner = Instance.new("UICorner")
+            uiCorner.CornerRadius = UDim.new(0.1, 0)
+            uiCorner.Parent = selectedElement
+            UICornerToggle.Text = "UICorner: On"
+            CornerRadius.Text = "0.1"
+        end
+    end
+end)
+
+CornerRadius.FocusLost:Connect(function()
+    if selectedElement then
+        local uiCorner = selectedElement:FindFirstChild("UICorner")
+        if uiCorner then
+            local radius = tonumber(CornerRadius.Text) or uiCorner.CornerRadius.Scale
+            radius = math.clamp(radius, 0, 1)
+            uiCorner.CornerRadius = UDim.new(radius, 0)
+            UICornerToggle.Text = "UICorner: On"
+        end
+    end
+end)
+
+RotationField.FocusLost:Connect(function()
+    if selectedElement then
+        local rotation = tonumber(RotationField.Text) or (selectedElement.Rotation or 0)
+        rotation = math.clamp(rotation, 0, 360)
+        selectedElement.Rotation = rotation
+    end
+end)
+
+ImageField.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("ImageButton") or selectedElement:IsA("ImageLabel")) then
+        local newImage = ImageField.Text
+        if newImage and newImage ~= "" then
+            pcall(function()
+                selectedElement.Image = newImage
+            end)
+        end
+    end
+end)
+
+ScriptField.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("TextButton") or selectedElement:IsA("ImageButton")) then
+        buttonScripts[selectedElement] = ScriptField.Text
+    end
+end)
+
+-- Welcome Screen Logic
+StartButton.MouseButton1Click:Connect(function()
+    WelcomeFrame.Visible = false
+    Toolbox.Visible = true
+end)
+
+-- Copy Script Functionality
+CopyScript.MouseButton1Click:Connect(function()
+    local scriptOutput = "-- GUI Created with Grok 3 Editor V2\n"
+    scriptOutput = scriptOutput .. "local ScreenGui = Instance.new('ScreenGui')\n"
+    scriptOutput = scriptOutput .. "ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui\n\n"
+    
+    local elementNames = {}
+    local elementCounter = 1
+
+    local function generateElementCode(element, parentVarName)
+        local varName = "Element" .. elementCounter
+        elementNames[element] = varName
+        elementCounter = elementCounter + 1
+        
+        local posXScale = element.Position.X.Scale
+        local posXOffset = element.Position.X.Offset
+        local posYScale = element.Position.Y.Scale
+        local posYOffset = element.Position.Y.Offset
+        
+        if element:IsA("TextButton") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('TextButton')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.Text = '%s'\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.TextColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.TextSize = %d\n%s.TextScaled = false\n%s.ZIndex = %d\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, element.Text,
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, math.floor(element.TextColor3.R * 255), math.floor(element.TextColor3.G * 255), math.floor(element.TextColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.TextSize,
+                varName, varName, element.ZIndex
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n\n", varName, parentVarName)
+        elseif element:IsA("Frame") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('Frame')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.ZIndex = %d\n%s.Visible = false\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.ZIndex,
+                varName
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n", varName, parentVarName)
+            for _, child in pairs(element:GetChildren()) do
+                if child:IsA("TextButton") or child:IsA("ImageButton") or 
+                   child:IsA("TextLabel") or child:IsA("ImageLabel") then
+                    generateElementCode(child, varName)
+                end
+            end
+            scriptOutput = scriptOutput .. "\n"
+        elseif element:IsA("ScrollingFrame") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('ScrollingFrame')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.ZIndex = %d\n%s.ScrollBarThickness = %d\n%s.ScrollingDirection = Enum.ScrollingDirection.Y\n%s.CanvasSize = UDim2.new(0, 0, 2, 0)\n%s.Visible = false\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.ZIndex,
+                varName, element.ScrollBarThickness,
+                varName, varName,
+                varName
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n", varName, parentVarName)
+            for _, child in pairs(element:GetChildren()) do
+                if child:IsA("TextButton") or child:IsA("ImageButton") or 
+                   child:IsA("TextLabel") or child:IsA("ImageLabel") then
+                    generateElementCode(child, varName)
+                end
+            end
+            scriptOutput = scriptOutput .. "\n"
+        elseif element:IsA("TextLabel") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('TextLabel')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.Text = '%s'\n%s.TextColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.TextSize = %d\n%s.TextScaled = false\n%s.ZIndex = %d\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, element.Text,
+                varName, math.floor(element.TextColor3.R * 255), math.floor(element.TextColor3.G * 255), math.floor(element.TextColor3.B * 255),
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.TextSize,
+                varName, varName, element.ZIndex
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n\n", varName, parentVarName)
+        elseif element:IsA("ImageButton") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('ImageButton')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.Image = '%s'\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.ZIndex = %d\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, element.Image,
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.ZIndex
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n\n", varName, parentVarName)
+        elseif element:IsA("ImageLabel") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('ImageLabel')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.Image = '%s'\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.ZIndex = %d\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, element.Image,
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.ZIndex
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n\n", varName, parentVarName)
+        end
+    end
+
+    for _, element in pairs(createdElements) do
+        if element.Parent == ScreenGui then
+            generateElementCode(element, "ScreenGui")
+        end
+    end
+
+    scriptOutput = scriptOutput .. "local function hideFrameAndChildren(frame)\n"
+    scriptOutput = scriptOutput .. "    frame.Visible = false\n"
+    scriptOutput = scriptOutput .. "    local frameChildren = {\n"
+    for parentFrame, children in pairs(frameChildren) do
+        if elementNames[parentFrame] then
+            scriptOutput = scriptOutput .. string.format("        [%s] = {", elementNames[parentFrame])
+            for i, childFrame in pairs(children) do
+                if elementNames[childFrame] then
+                    scriptOutput = scriptOutput .. (i > 1 and ", " or "") .. elementNames[childFrame]
+                end
+            end
+            scriptOutput = scriptOutput .. "},\n"
+        end
+    end
+    scriptOutput = scriptOutput .. "    }\n"
+    scriptOutput = scriptOutput .. "    if frameChildren[frame] then\n"
+    scriptOutput = scriptOutput .. "        for _, childFrame in pairs(frameChildren[frame]) do\n"
+    scriptOutput = scriptOutput .. "            childFrame.Visible = false\n"
+    scriptOutput = scriptOutput .. "        end\n"
+    scriptOutput = scriptOutput .. "    end\n"
+    scriptOutput = scriptOutput .. "end\n\n"
+
+    for button, frame in pairs(buttonBindings) do
+        if elementNames[button] and elementNames[frame] then
+            scriptOutput = scriptOutput .. string.format(
+                "%s.MouseButton1Click:Connect(function()\n    if %s.Visible then\n        hideFrameAndChildren(%s)\n    else\n        %s.Visible = true\n    end\n",
+                elementNames[button], elementNames[frame], elementNames[frame], elementNames[frame]
+            )
+            local scriptCode = buttonScripts[button]
+            if scriptCode and scriptCode ~= "Enter Lua Script Here" and scriptCode ~= "" then
+                scriptOutput = scriptOutput .. "    " .. scriptCode .. "\n"
+            end
+            scriptOutput = scriptOutput .. "end)\n\n"
+        end
+    end
+
+    for button, scriptCode in pairs(buttonScripts) do
+        if (button:IsA("TextButton") or button:IsA("ImageButton")) and not buttonBindings[button] and scriptCode and scriptCode ~= "Enter Lua Script Here" and scriptCode ~= "" then
+            scriptOutput = scriptOutput .. string.format(
+                "%s.MouseButton1Click:Connect(function()\n    %s\nend)\n\n",
+                elementNames[button], scriptCode
+            )
+        end
+    end
+    
+    setclipboard(scriptOutput)
+    CopyScript.Text = "Copied!"
+    wait(1)
+    CopyScript.Text = "Copy Script"
+end)
+
+-- Scrolling Toggle
+ScrollingToggle.MouseButton1Click:Connect(function()
+    if selectedElement and (selectedElement:IsA("Frame") or selectedElement:IsA("ScrollingFrame")) then
+        local index = table.find(createdElements, selectedElement)
+        if index then
+            if selectedElement:IsA("Frame") then
+                local newScrollingFrame = Instance.new("ScrollingFrame")
+                newScrollingFrame.Size = selectedElement.Size
+                newScrollingFrame.Position = selectedElement.Position
+                newScrollingFrame.BackgroundColor3 = selectedElement.BackgroundColor3
+                newScrollingFrame.BackgroundTransparency = selectedElement.BackgroundTransparency
+                newScrollingFrame.ZIndex = selectedElement.ZIndex
+                newScrollingFrame.Rotation = selectedElement.Rotation or 0
+                newScrollingFrame.ScrollBarThickness = 8
+                newScrollingFrame.ScrollingDirection = Enum.ScrollingDirection.Y
+                newScrollingFrame.CanvasSize = UDim2.new(0, 0, 2, 0)
+                newScrollingFrame.Parent = selectedElement.Parent
+                
+                local uiCorner = selectedElement:FindFirstChild("UICorner")
+                if uiCorner then
+                    local newUICorner = Instance.new("UICorner")
+                    newUICorner.CornerRadius = uiCorner.CornerRadius
+                    newUICorner.Parent = newScrollingFrame
+                end
+                
+                for _, child in pairs(selectedElement:GetChildren()) do
+                    if not child:IsA("UICorner") then
+                        child.Parent = newScrollingFrame
+                    end
+                end
+                
+                for button, boundFrame in pairs(buttonBindings) do
+                    if boundFrame == selectedElement then
+                        buttonBindings[button] = newScrollingFrame
+                    end
+                end
+                if frameChildren[selectedElement] then
+                    frameChildren[newScrollingFrame] = frameChildren[selectedElement]
+                    frameChildren[selectedElement] = nil
+                end
+                
+                selectedElement:Destroy()
+                createdElements[index] = newScrollingFrame
+                selectedElement = newScrollingFrame
+                makeDraggable(newScrollingFrame)
+                ScrollingToggle.Text = "Scrolling: On"
+                
+                newScrollingFrame.InputBegan:Connect(function(input)
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                       input.UserInputType == Enum.UserInputType.Touch then
+                        selectElement(newScrollingFrame)
+                    end
+                end)
+            elseif selectedElement:IsA("ScrollingFrame") then
+                local newFrame = Instance.new("Frame")
+                newFrame.Size = selectedElement.Size
+                newFrame.Position = selectedElement.Position
+                newFrame.BackgroundColor3 = selectedElement.BackgroundColor3
+                newFrame.BackgroundTransparency = selectedElement.BackgroundTransparency
+                newFrame.ZIndex = selectedElement.ZIndex
+                newFrame.Rotation = selectedElement.Rotation or 0
+                newFrame.Parent = selectedElement.Parent
+                
+                local uiCorner = selectedElement:FindFirstChild("UICorner")
+                if uiCorner then
+                    local newUICorner = Instance.new("UICorner")
+                    newUICorner.CornerRadius =-- Parent Selection Popup (Enhanced Design)
+local function showParentSelectionPopup(elementType, callback)
+    hideAllPopupsExcept(nil)
+    local popup = Instance.new("Frame")
+    popup.Size = UDim2.new(0.35, 0, 0.45, 0)
+    popup.Position = UDim2.new(0.325, 0, 0.275, 0)
+    popup.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    popup.BorderSizePixel = 0
+    popup.Parent = ScreenGui
+    currentPopup = popup
+
+    local PopupCorner = Instance.new("UICorner")
+    PopupCorner.CornerRadius = UDim.new(0, 10)
+    PopupCorner.Parent = popup
+
+    local PopupStroke = Instance.new("UIStroke")
+    PopupStroke.Color = Color3.fromRGB(50, 50, 60)
+    PopupStroke.Thickness = 2
+    PopupStroke.Parent = popup
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(0.9, 0, 0.15, 0)
+    title.Position = UDim2.new(0.05, 0, 0.05, 0)
+    title.Text = "Select Parent for " .. elementType
+    title.TextColor3 = Color3.fromRGB(220, 220, 255)
+    title.BackgroundTransparency = 1
+    title.TextScaled = true
+    title.Font = Enum.Font.GothamBold
+    title.Parent = popup
+
+    local parentList = Instance.new("ScrollingFrame")
+    parentList.Size = UDim2.new(0.9, 0, 0.75, 0)
+    parentList.Position = UDim2.new(0.05, 0, 0.2, 0)
+    parentList.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+    parentList.BorderSizePixel = 0
+    parentList.ScrollBarThickness = 6
+    parentList.Parent = popup
+
+    local ListCorner = Instance.new("UICorner")
+    ListCorner.CornerRadius = UDim.new(0, 6)
+    ListCorner.Parent = parentList
+
+    local screenGuiOption = Instance.new("TextButton")
+    screenGuiOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+    screenGuiOption.Position = UDim2.new(0.075, 0, 0, 0)
+    screenGuiOption.Text = "ScreenGui"
+    screenGuiOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    screenGuiOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    screenGuiOption.BorderSizePixel = 0
+    screenGuiOption.Font = Enum.Font.Gotham
+    screenGuiOption.TextScaled = true
+    screenGuiOption.Parent = parentList
+
+    local ScreenGuiCorner = Instance.new("UICorner")
+    ScreenGuiCorner.CornerRadius = UDim.new(0, 6)
+    ScreenGuiCorner.Parent = screenGuiOption
+
+    local ScreenGuiStroke = Instance.new("UIStroke")
+    ScreenGuiStroke.Color = Color3.fromRGB(70, 100, 220)
+    ScreenGuiStroke.Thickness = 1
+    ScreenGuiStroke.Parent = screenGuiOption
+
+    screenGuiOption.MouseButton1Click:Connect(function()
+        callback(ScreenGui)
+        popup:Destroy()
+        currentPopup = nil
+    end)
+
+    local frames = {}
+    for i, element in pairs(createdElements) do
+        if element:IsA("Frame") or element:IsA("ScrollingFrame") then
+            table.insert(frames, element)
+            local frameOption = Instance.new("TextButton")
+            frameOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+            frameOption.Position = UDim2.new(0.075, 0, 0.15 * i, 0)
+            frameOption.Text = element.Name
+            frameOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+            frameOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+            frameOption.BorderSizePixel = 0
+            frameOption.Font = Enum.Font.Gotham
+            frameOption.TextScaled = true
+            frameOption.Parent = parentList
+
+            local FrameCorner = Instance.new("UICorner")
+            FrameCorner.CornerRadius = UDim.new(0, 6)
+            FrameCorner.Parent = frameOption
+
+            local FrameStroke = Instance.new("UIStroke")
+            FrameStroke.Color = Color3.fromRGB(70, 100, 220)
+            FrameStroke.Thickness = 1
+            FrameStroke.Parent = frameOption
+
+            frameOption.MouseButton1Click:Connect(function()
+                callback(element)
+                popup:Destroy()
+                currentPopup = nil
+            end)
+        end
+    end
+    
+    return popup
+end
+
+-- Buttons Popup (Enhanced Design)
+local function showButtonsPopup()
+    if currentPopup and currentPopup.Name == "ButtonsPopup" then
+        currentPopup:Destroy()
+        currentPopup = nil
+        return
+    end
+    hideAllPopupsExcept(nil)
+
+    local popup = Instance.new("Frame")
+    popup.Size = UDim2.new(0.35, 0, 0.55, 0)
+    popup.Position = UDim2.new(0.325, 0, 0.225, 0)
+    popup.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    popup.BorderSizePixel = 0
+    popup.Name = "ButtonsPopup"
+    popup.Parent = ScreenGui
+    currentPopup = popup
+
+    local PopupCorner = Instance.new("UICorner")
+    PopupCorner.CornerRadius = UDim.new(0, 10)
+    PopupCorner.Parent = popup
+
+    local PopupStroke = Instance.new("UIStroke")
+    PopupStroke.Color = Color3.fromRGB(50, 50, 60)
+    PopupStroke.Thickness = 2
+    PopupStroke.Parent = popup
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(0.9, 0, 0.15, 0)
+    title.Position = UDim2.new(0.05, 0, 0.05, 0)
+    title.Text = "Add Element"
+    title.TextColor3 = Color3.fromRGB(220, 220, 255)
+    title.BackgroundTransparency = 1
+    title.TextScaled = true
+    title.Font = Enum.Font.GothamBold
+    title.Parent = popup
+
+    local textButtonOption = Instance.new("TextButton")
+    textButtonOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+    textButtonOption.Position = UDim2.new(0.075, 0, 0.25, 0)
+    textButtonOption.Text = "TextButton"
+    textButtonOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    textButtonOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textButtonOption.BorderSizePixel = 0
+    textButtonOption.Font = Enum.Font.Gotham
+    textButtonOption.TextScaled = true
+    textButtonOption.Parent = popup
+
+    local TextButtonCorner = Instance.new("UICorner")
+    TextButtonCorner.CornerRadius = UDim.new(0, 6)
+    TextButtonCorner.Parent = textButtonOption
+
+    local TextButtonStroke = Instance.new("UIStroke")
+    TextButtonStroke.Color = Color3.fromRGB(70, 100, 220)
+    TextButtonStroke.Thickness = 1
+    TextButtonStroke.Parent = textButtonOption
+
+    local imageButtonOption = Instance.new("TextButton")
+    imageButtonOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+    imageButtonOption.Position = UDim2.new(0.075, 0, 0.42, 0)
+    imageButtonOption.Text = "ImageButton"
+    imageButtonOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    imageButtonOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    imageButtonOption.BorderSizePixel = 0
+    imageButtonOption.Font = Enum.Font.Gotham
+    imageButtonOption.TextScaled = true
+    imageButtonOption.Parent = popup
+
+    local ImageButtonCorner = Instance.new("UICorner")
+    ImageButtonCorner.CornerRadius = UDim.new(0, 6)
+    ImageButtonCorner.Parent = imageButtonOption
+
+    local ImageButtonStroke = Instance.new("UIStroke")
+    ImageButtonStroke.Color = Color3.fromRGB(70, 100, 220)
+    ImageButtonStroke.Thickness = 1
+    ImageButtonStroke.Parent = imageButtonOption
+
+    local textLabelOption = Instance.new("TextButton")
+    textLabelOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+    textLabelOption.Position = UDim2.new(0.075, 0, 0.59, 0)
+    textLabelOption.Text = "TextLabel"
+    textLabelOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    textLabelOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabelOption.BorderSizePixel = 0
+    textLabelOption.Font = Enum.Font.Gotham
+    textLabelOption.TextScaled = true
+    textLabelOption.Parent = popup
+
+    local TextLabelCorner = Instance.new("UICorner")
+    TextLabelCorner.CornerRadius = UDim.new(0, 6)
+    TextLabelCorner.Parent = textLabelOption
+
+    local TextLabelStroke = Instance.new("UIStroke")
+    TextLabelStroke.Color = Color3.fromRGB(70, 100, 220)
+    TextLabelStroke.Thickness = 1
+    TextLabelStroke.Parent = textLabelOption
+
+    local imageLabelOption = Instance.new("TextButton")
+    imageLabelOption.Size = UDim2.new(0.85, 0, 0.15, 0)
+    imageLabelOption.Position = UDim2.new(0.075, 0, 0.76, 0)
+    imageLabelOption.Text = "ImageLabel"
+    imageLabelOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    imageLabelOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    imageLabelOption.BorderSizePixel = 0
+    imageLabelOption.Font = Enum.Font.Gotham
+    imageLabelOption.TextScaled = true
+    imageLabelOption.Parent = popup
+
+    local ImageLabelCorner = Instance.new("UICorner")
+    ImageLabelCorner.CornerRadius = UDim.new(0, 6)
+    ImageLabelCorner.Parent = imageLabelOption
+
+    local ImageLabelStroke = Instance.new("UIStroke")
+    ImageLabelStroke.Color = Color3.fromRGB(70, 100, 220)
+    ImageLabelStroke.Thickness = 1
+    ImageLabelStroke.Parent = imageLabelOption
+
+    textButtonOption.MouseButton1Click:Connect(function()
+        local parentPopup = showParentSelectionPopup("TextButton", function(parent)
+            local newButton = Instance.new("TextButton")
+            newButton.Size = UDim2.new(0.3, 0, 0.15, 0)
+            newButton.Position = UDim2.new(0.2, 0, 0.3, 0)
+            newButton.Text = "New Button"
+            newButton.ZIndex = 2
+            newButton.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+            newButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            newButton.TextSize = 14
+            newButton.Parent = parent
+            table.insert(createdElements, newButton)
+            makeDraggable(newButton)
+            
+            newButton.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                   input.UserInputType == Enum.UserInputType.Touch then
+                    selectElement(newButton)
+                end
+            end)
+            
+            newButton.MouseButton1Click:Connect(function()
+                local scriptCode = buttonScripts[newButton]
+                if scriptCode and scriptCode ~= "Enter Lua Script Here" and scriptCode ~= "" then
+                    local func, err = loadstring(scriptCode)
+                    if func then
+                        pcall(func)
+                    else
+                        warn("Error in script: " .. err)
+                    end
+                end
+            end)
+        end)
+        popup:Destroy()
+        currentPopup = parentPopup
+    end)
+
+    imageButtonOption.MouseButton1Click:Connect(function()
+        local parentPopup = showParentSelectionPopup("ImageButton", function(parent)
+            local newImageButton = Instance.new("ImageButton")
+            newImageButton.Size = UDim2.new(0.4, 0, 0.4, 0)
+            newImageButton.Position = UDim2.new(0.2, 0, 0.3, 0)
+            newImageButton.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+            newImageButton.Image = "rbxassetid://123456"
+            newImageButton.ZIndex = 2
+            newImageButton.Parent = parent
+            table.insert(createdElements, newImageButton)
+            makeDraggable(newImageButton)
+            
+            newImageButton.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                   input.UserInputType == Enum.UserInputType.Touch then
+                    selectElement(newImageButton)
+                end
+            end)
+            
+            newImageButton.MouseButton1Click:Connect(function()
+                local scriptCode = buttonScripts[newImageButton]
+                if scriptCode and scriptCode ~= "Enter Lua Script Here" and scriptCode ~= "" then
+                    local func, err = loadstring(scriptCode)
+                    if func then
+                        pcall(func)
+                    else
+                        warn("Error in script: " .. err)
+                    end
+                end
+            end)
+        end)
+        popup:Destroy()
+        currentPopup = parentPopup
+    end)
+
+    textLabelOption.MouseButton1Click:Connect(function()
+        local parentPopup = showParentSelectionPopup("TextLabel", function(parent)
+            local newTextLabel = Instance.new("TextLabel")
+            newTextLabel.Size = UDim2.new(0.4, 0, 0.2, 0)
+            newTextLabel.Position = UDim2.new(0.2, 0, 0.3, 0)
+            newTextLabel.Text = "New TextLabel"
+            newTextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            newTextLabel.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+            newTextLabel.TextSize = 18
+            newTextLabel.ZIndex = 2
+            newTextLabel.Parent = parent
+            table.insert(createdElements, newTextLabel)
+            makeDraggable(newTextLabel)
+            
+            newTextLabel.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                   input.UserInputType == Enum.UserInputType.Touch then
+                    selectElement(newTextLabel)
+                end
+            end)
+            if parent:IsA("Frame") or parent:IsA("ScrollingFrame") then
+                parent.Active = false
+            end
+        end)
+        popup:Destroy()
+        currentPopup = parentPopup
+    end)
+
+    imageLabelOption.MouseButton1Click:Connect(function()
+        local parentPopup = showParentSelectionPopup("ImageLabel", function(parent)
+            local newImageLabel = Instance.new("ImageLabel")
+            newImageLabel.Size = UDim2.new(0.4, 0, 0.4, 0)
+            newImageLabel.Position = UDim2.new(0.2, 0, 0.3, 0)
+            newImageLabel.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+            newImageLabel.Image = "rbxassetid://123456"
+            newImageLabel.ZIndex = 2
+            newImageLabel.Parent = parent
+            table.insert(createdElements, newImageLabel)
+            makeDraggable(newImageLabel)
+            
+            newImageLabel.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                   input.UserInputType == Enum.UserInputType.Touch then
+                    selectElement(newImageLabel)
+                end
+            end)
+        end)
+        popup:Destroy()
+        currentPopup = parentPopup
+    end)
+end
+
+-- StartGui Popup (Enhanced Design)
+local function showStartGuiPopup()
+    if currentPopup and currentPopup.Name == "StartGuiPopup" then
+        currentPopup:Destroy()
+        currentPopup = nil
+        return
+    end
+    hideAllPopupsExcept(nil)
+
+    local popup = Instance.new("Frame")
+    popup.Size = UDim2.new(0.35, 0, 0.35, 0)
+    popup.Position = UDim2.new(0.325, 0, 0.325, 0)
+    popup.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    popup.BorderSizePixel = 0
+    popup.Name = "StartGuiPopup"
+    popup.Parent = ScreenGui
+    currentPopup = popup
+
+    local PopupCorner = Instance.new("UICorner")
+    PopupCorner.CornerRadius = UDim.new(0, 10)
+    PopupCorner.Parent = popup
+
+    local PopupStroke = Instance.new("UIStroke")
+    PopupStroke.Color = Color3.fromRGB(50, 50, 60)
+    PopupStroke.Thickness = 2
+    PopupStroke.Parent = popup
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(0.9, 0, 0.2, 0)
+    title.Position = UDim2.new(0.05, 0, 0.05, 0)
+    title.Text = "Select Parent:"
+    title.TextColor3 = Color3.fromRGB(220, 220, 255)
+    title.BackgroundTransparency = 1
+    title.TextScaled = true
+    title.Font = Enum.Font.GothamBold
+    title.Parent = popup
+
+    local screenGuiOption = Instance.new("TextButton")
+    screenGuiOption.Size = UDim2.new(0.85, 0, 0.25, 0)
+    screenGuiOption.Position = UDim2.new(0.075, 0, 0.35, 0)
+    screenGuiOption.Text = "ScreenGui"
+    screenGuiOption.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+    screenGuiOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+    screenGuiOption.BorderSizePixel = 0
+    screenGuiOption.Font = Enum.Font.Gotham
+    screenGuiOption.TextScaled = true
+    screenGuiOption.Parent = popup
+
+    local ScreenGuiCorner = Instance.new("UICorner")
+    ScreenGuiCorner.CornerRadius = UDim.new(0, 6)
+    ScreenGuiCorner.Parent = screenGuiOption
+
+    local ScreenGuiStroke = Instance.new("UIStroke")
+    ScreenGuiStroke.Color = Color3.fromRGB(70, 100, 220)
+    ScreenGuiStroke.Thickness = 1
+    ScreenGuiStroke.Parent = screenGuiOption
+
+    local coreGuiLabel = Instance.new("TextLabel")
+    coreGuiLabel.Size = UDim2.new(0.85, 0, 0.25, 0)
+    coreGuiLabel.Position = UDim2.new(0.075, 0, 0.65, 0)
+    coreGuiLabel.Text = "CoreGui <Coming>"
+    coreGuiLabel.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
+    coreGuiLabel.TextColor3 = Color3.fromRGB(180, 180, 200)
+    coreGuiLabel.BorderSizePixel = 0
+    coreGuiLabel.Font = Enum.Font.Gotham
+    coreGuiLabel.TextScaled = true
+    coreGuiLabel.Parent = popup
+
+    local CoreGuiCorner = Instance.new("UICorner")
+    CoreGuiCorner.CornerRadius = UDim.new(0, 6)
+    CoreGuiCorner.Parent = coreGuiLabel
+
+    local CoreGuiStroke = Instance.new("UIStroke")
+    CoreGuiStroke.Color = Color3.fromRGB(80, 80, 90)
+    CoreGuiStroke.Thickness = 1
+    CoreGuiStroke.Parent = coreGuiLabel
+
+    screenGuiOption.MouseButton1Click:Connect(function()
+        local newFrame = Instance.new("Frame")
+        newFrame.Size = UDim2.new(0.6, 0, 0.6, 0)
+        newFrame.Position = UDim2.new(0.2, 0, 0.3, 0)
+        newFrame.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+        newFrame.ZIndex = 1
+        newFrame.Parent = ScreenGui
+        table.insert(createdElements, newFrame)
+        makeDraggable(newFrame)
+        
+        newFrame.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+               input.UserInputType == Enum.UserInputType.Touch then
+                selectElement(newFrame)
+            end
+        end)
+        popup:Destroy()
+        currentPopup = nil
+    end)
+end
+
+-- Bind Button to Frame Popup (Enhanced Design)
+local function showBindButtonToFramePopup(button)
+    if currentPopup and currentPopup.Name == "BindPopup" then
+        currentPopup:Destroy()
+        currentPopup = nil
+        return
+    end
+    hideAllPopupsExcept(nil)
+
+    local popup = Instance.new("Frame")
+    popup.Size = UDim2.new(0.35, 0, 0.35, 0)
+    popup.Position = UDim2.new(0.325, 0, 0.325, 0)
+    popup.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    popup.BorderSizePixel = 0
+    popup.Name = "BindPopup"
+    popup.Parent = ScreenGui
+    currentPopup = popup
+
+    local PopupCorner = Instance.new("UICorner")
+    PopupCorner.CornerRadius = UDim.new(0, 10)
+    PopupCorner.Parent = popup
+
+    local PopupStroke = Instance.new("UIStroke")
+    PopupStroke.Color = Color3.fromRGB(50, 50, 60)
+    PopupStroke.Thickness = 2
+    PopupStroke.Parent = popup
+
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(0.9, 0, 0.2, 0)
+    label.Position = UDim2.new(0.05, 0, 0.05, 0)
+    label.Text = "Select Frame to Bind:"
+    label.TextColor3 = Color3.fromRGB(220, 220, 255)
+    label.BackgroundTransparency = 1
+    label.Font = Enum.Font.GothamBold
+    label.TextScaled = true
+    label.Parent = popup
+
+    local framesList = Instance.new("ScrollingFrame")
+    framesList.Size = UDim2.new(0.9, 0, 0.7, 0)
+    framesList.Position = UDim2.new(0.05, 0, 0.25, 0)
+    framesList.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+    framesList.BorderSizePixel = 0
+    framesList.ScrollBarThickness = 6
+    framesList.Parent = popup
+
+    local ListCorner = Instance.new("UICorner")
+    ListCorner.CornerRadius = UDim.new(0, 6)
+    ListCorner.Parent = framesList
+
+    local frames = {}
+    for _, element in pairs(createdElements) do
+        if element:IsA("Frame") or element:IsA("ScrollingFrame") then
+            table.insert(frames, element)
+        end
+    end
+
+    for i, frame in pairs(frames) do
+        local frameButton = Instance.new("TextButton")
+        frameButton.Size = UDim2.new(0.85, 0, 0.1, 0)
+        frameButton.Position = UDim2.new(0.075, 0, 0.1 * (i - 1), 0)
+        frameButton.Text = frame.Name
+        frameButton.BackgroundColor3 = Color3.fromRGB(50, 80, 200)
+        frameButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        frameButton.BorderSizePixel = 0
+        frameButton.Font = Enum.Font.Gotham
+        frameButton.TextScaled = true
+        frameButton.Parent = framesList
+
+        local FrameCorner = Instance.new("UICorner")
+        FrameCorner.CornerRadius = UDim.new(0, 6)
+        FrameCorner.Parent = frameButton
+
+        local FrameStroke = Instance.new("UIStroke")
+        FrameStroke.Color = Color3.fromRGB(70, 100, 220)
+        FrameStroke.Thickness = 1
+        FrameStroke.Parent = frameButton
+
+        frameButton.MouseButton1Click:Connect(function()
+            for _, connection in pairs(getconnections(button.MouseButton1Click)) do
+                connection:Disconnect()
+            end
+            buttonBindings[button] = frame
+            frame.Visible = false
+
+            local parentFrame = button.Parent
+            while parentFrame and not (parentFrame:IsA("Frame") or parentFrame:IsA("ScrollingFrame")) do
+                parentFrame = parentFrame.Parent
+            end
+            if parentFrame and (parentFrame:IsA("Frame") or parentFrame:IsA("ScrollingFrame")) then
+                if not frameChildren[parentFrame] then
+                    frameChildren[parentFrame] = {}
+                end
+                table.insert(frameChildren[parentFrame], frame)
+            end
+
+            button.MouseButton1Click:Connect(function()
+                if frame.Visible then
+                    hideFrameAndChildren(frame)
+                else
+                    frame.Visible = true
+                end
+                local scriptCode = buttonScripts[button]
+                if scriptCode and scriptCode ~= "Enter Lua Script Here" and scriptCode ~= "" then
+                    local func, err = loadstring(scriptCode)
+                    if func then
+                        pcall(func)
+                    else
+                        warn("Error in script: " .. err)
+                    end
+                end
+            end)
+            popup:Destroy()
+            currentPopup = nil
+        end)
+    end
+end
+
+-- Toolbox Button Connections
+ButtonsButton.MouseButton1Click:Connect(showButtonsPopup)
+StartGuiButton.MouseButton1Click:Connect(showStartGuiPopup)
+BindButtonToFrame.MouseButton1Click:Connect(function()
+    if selectedElement and selectedElement:IsA("TextButton") then
+        showBindButtonToFramePopup(selectedElement)
+    else
+        warn("Please select a button first!")
+    end
+end)
+
+-- Delete Element Functionality
+DeleteElementButton.MouseButton1Click:Connect(function()
+    if selectedElement then
+        local index = table.find(createdElements, selectedElement)
+        if index then
+            table.remove(createdElements, index)
+            if buttonBindings[selectedElement] then
+                buttonBindings[selectedElement] = nil
+            end
+            if buttonScripts[selectedElement] then
+                buttonScripts[selectedElement] = nil
+            end
+            if frameChildren[selectedElement] then
+                frameChildren[selectedElement] = nil
+            end
+            for _, frames in pairs(frameChildren) do
+                local childIndex = table.find(frames, selectedElement)
+                if childIndex then
+                    table.remove(frames, childIndex)
+                end
+            end
+            selectedElement:Destroy()
+            selectedElement = nil
+            Properties.Visible = false
+        end
+    end
+end)
+
+-- Property Updates
+NameField.FocusLost:Connect(function()
+    if selectedElement then
+        if selectedElement:IsA("TextButton") or selectedElement:IsA("TextLabel") then
+            selectedElement.Text = NameField.Text
+        else
+            selectedElement.Name = NameField.Text
+        end
+    end
+end)
+
+SizeX.FocusLost:Connect(function()
+    if selectedElement then
+        local newX = tonumber(SizeX.Text) or selectedElement.Size.X.Scale
+        selectedElement.Size = UDim2.new(newX, 0, selectedElement.Size.Y.Scale, 0)
+        ScaleX.Text = tostring(math.floor(newX * 100))
+    end
+end)
+
+SizeY.FocusLost:Connect(function()
+    if selectedElement then
+        local newY = tonumber(SizeY.Text) or selectedElement.Size.Y.Scale
+        selectedElement.Size = UDim2.new(selectedElement.Size.X.Scale, 0, newY, 0)
+        ScaleY.Text = tostring(math.floor(newY * 100))
+    end
+end)
+
+ScaleX.FocusLost:Connect(function()
+    if selectedElement then
+        local newScaleX = tonumber(ScaleX.Text) or (selectedElement.Size.X.Scale * 100)
+        newScaleX = math.clamp(newScaleX, 0, 1000) / 100
+        selectedElement.Size = UDim2.new(newScaleX, 0, selectedElement.Size.Y.Scale, 0)
+        SizeX.Text = tostring(newScaleX)
+    end
+end)
+
+ScaleY.FocusLost:Connect(function()
+    if selectedElement then
+        local newScaleY = tonumber(ScaleY.Text) or (selectedElement.Size.Y.Scale * 100)
+        newScaleY = math.clamp(newScaleY, 0, 1000) / 100
+        selectedElement.Size = UDim2.new(selectedElement.Size.X.Scale, 0, newScaleY, 0)
+        SizeY.Text = tostring(newScaleY)
+    end
+end)
+
+ColorR.FocusLost:Connect(function()
+    if selectedElement then
+        local r = tonumber(ColorR.Text) or (selectedElement.BackgroundColor3.R * 255)
+        local g = tonumber(ColorG.Text) or (selectedElement.BackgroundColor3.G * 255)
+        local b = tonumber(ColorB.Text) or (selectedElement.BackgroundColor3.B * 255)
+        r = math.clamp(r, 0, 255)
+        selectedElement.BackgroundColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+ColorG.FocusLost:Connect(function()
+    if selectedElement then
+        local r = tonumber(ColorR.Text) or (selectedElement.BackgroundColor3.R * 255)
+        local g = tonumber(ColorG.Text) or (selectedElement.BackgroundColor3.G * 255)
+        local b = tonumber(ColorB.Text) or (selectedElement.BackgroundColor3.B * 255)
+        g = math.clamp(g, 0, 255)
+        selectedElement.BackgroundColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+ColorB.FocusLost:Connect(function()
+    if selectedElement then
+        local r = tonumber(ColorR.Text) or (selectedElement.BackgroundColor3.R * 255)
+        local g = tonumber(ColorG.Text) or (selectedElement.BackgroundColor3.G * 255)
+        local b = tonumber(ColorB.Text) or (selectedElement.BackgroundColor3.B * 255)
+        b = math.clamp(b, 0, 255)
+        selectedElement.BackgroundColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+TextColorR.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("TextButton") or selectedElement:IsA("TextLabel")) then
+        local r = tonumber(TextColorR.Text) or (selectedElement.TextColor3.R * 255)
+        local g = tonumber(TextColorG.Text) or (selectedElement.TextColor3.G * 255)
+        local b = tonumber(TextColorB.Text) or (selectedElement.TextColor3.B * 255)
+        r = math.clamp(r, 0, 255)
+        selectedElement.TextColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+TextColorG.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("TextButton") or selectedElement:IsA("TextLabel")) then
+        local r = tonumber(TextColorR.Text) or (selectedElement.TextColor3.R * 255)
+        local g = tonumber(TextColorG.Text) or (selectedElement.TextColor3.G * 255)
+        local b = tonumber(TextColorB.Text) or (selectedElement.TextColor3.B * 255)
+        g = math.clamp(g, 0, 255)
+        selectedElement.TextColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+TextColorB.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("TextButton") or selectedElement:IsA("TextLabel")) then
+        local r = tonumber(TextColorR.Text) or (selectedElement.TextColor3.R * 255)
+        local g = tonumber(TextColorG.Text) or (selectedElement.TextColor3.G * 255)
+        local b = tonumber(TextColorB.Text) or (selectedElement.TextColor3.B * 255)
+        b = math.clamp(b, 0, 255)
+        selectedElement.TextColor3 = Color3.fromRGB(r, g, b)
+    end
+end)
+
+TransparencyField.FocusLost:Connect(function()
+    if selectedElement then
+        local transparency = tonumber(TransparencyField.Text) or selectedElement.BackgroundTransparency
+        transparency = math.clamp(transparency, 0, 1)
+        selectedElement.BackgroundTransparency = transparency
+    end
+end)
+
+ZIndexField.FocusLost:Connect(function()
+    if selectedElement then
+        local zIndex = tonumber(ZIndexField.Text) or selectedElement.ZIndex
+        zIndex = math.clamp(zIndex, -100, 100)
+        selectedElement.ZIndex = zIndex
+    end
+end)
+
+TextSizeField.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("TextButton") or selectedElement:IsA("TextLabel")) then
+        local textSize = tonumber(TextSizeField.Text) or selectedElement.TextSize
+        textSize = math.clamp(textSize, 1, 100)
+        selectedElement.TextSize = textSize
+        selectedElement.TextScaled = false
+    end
+end)
+
+UICornerToggle.MouseButton1Click:Connect(function()
+    if selectedElement then
+        local uiCorner = selectedElement:FindFirstChild("UICorner")
+        if uiCorner then
+            uiCorner:Destroy()
+            UICornerToggle.Text = "UICorner: Off"
+            CornerRadius.Text = "0"
+        else
+            uiCorner = Instance.new("UICorner")
+            uiCorner.CornerRadius = UDim.new(0.1, 0)
+            uiCorner.Parent = selectedElement
+            UICornerToggle.Text = "UICorner: On"
+            CornerRadius.Text = "0.1"
+        end
+    end
+end)
+
+CornerRadius.FocusLost:Connect(function()
+    if selectedElement then
+        local uiCorner = selectedElement:FindFirstChild("UICorner")
+        if uiCorner then
+            local radius = tonumber(CornerRadius.Text) or uiCorner.CornerRadius.Scale
+            radius = math.clamp(radius, 0, 1)
+            uiCorner.CornerRadius = UDim.new(radius, 0)
+            UICornerToggle.Text = "UICorner: On"
+        end
+    end
+end)
+
+RotationField.FocusLost:Connect(function()
+    if selectedElement then
+        local rotation = tonumber(RotationField.Text) or (selectedElement.Rotation or 0)
+        rotation = math.clamp(rotation, 0, 360)
+        selectedElement.Rotation = rotation
+    end
+end)
+
+ImageField.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("ImageButton") or selectedElement:IsA("ImageLabel")) then
+        local newImage = ImageField.Text
+        if newImage and newImage ~= "" then
+            pcall(function()
+                selectedElement.Image = newImage
+            end)
+        end
+    end
+end)
+
+ScriptField.FocusLost:Connect(function()
+    if selectedElement and (selectedElement:IsA("TextButton") or selectedElement:IsA("ImageButton")) then
+        buttonScripts[selectedElement] = ScriptField.Text
+    end
+end)
+
+-- Welcome Screen Logic
+StartButton.MouseButton1Click:Connect(function()
+    WelcomeFrame.Visible = false
+    Toolbox.Visible = true
+end)
+
+-- Copy Script Functionality
+CopyScript.MouseButton1Click:Connect(function()
+    local scriptOutput = "-- GUI Created with Grok 3 Editor V2\n"
+    scriptOutput = scriptOutput .. "local ScreenGui = Instance.new('ScreenGui')\n"
+    scriptOutput = scriptOutput .. "ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui\n\n"
+    
+    local elementNames = {}
+    local elementCounter = 1
+
+    local function generateElementCode(element, parentVarName)
+        local varName = "Element" .. elementCounter
+        elementNames[element] = varName
+        elementCounter = elementCounter + 1
+        
+        local posXScale = element.Position.X.Scale
+        local posXOffset = element.Position.X.Offset
+        local posYScale = element.Position.Y.Scale
+        local posYOffset = element.Position.Y.Offset
+        
+        if element:IsA("TextButton") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('TextButton')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.Text = '%s'\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.TextColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.TextSize = %d\n%s.TextScaled = false\n%s.ZIndex = %d\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, element.Text,
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, math.floor(element.TextColor3.R * 255), math.floor(element.TextColor3.G * 255), math.floor(element.TextColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.TextSize,
+                varName, varName, element.ZIndex
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n\n", varName, parentVarName)
+        elseif element:IsA("Frame") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('Frame')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.ZIndex = %d\n%s.Visible = false\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.ZIndex,
+                varName
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n", varName, parentVarName)
+            for _, child in pairs(element:GetChildren()) do
+                if child:IsA("TextButton") or child:IsA("ImageButton") or 
+                   child:IsA("TextLabel") or child:IsA("ImageLabel") then
+                    generateElementCode(child, varName)
+                end
+            end
+            scriptOutput = scriptOutput .. "\n"
+        elseif element:IsA("ScrollingFrame") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('ScrollingFrame')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.ZIndex = %d\n%s.ScrollBarThickness = %d\n%s.ScrollingDirection = Enum.ScrollingDirection.Y\n%s.CanvasSize = UDim2.new(0, 0, 2, 0)\n%s.Visible = false\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.ZIndex,
+                varName, element.ScrollBarThickness,
+                varName, varName,
+                varName
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n", varName, parentVarName)
+            for _, child in pairs(element:GetChildren()) do
+                if child:IsA("TextButton") or child:IsA("ImageButton") or 
+                   child:IsA("TextLabel") or child:IsA("ImageLabel") then
+                    generateElementCode(child, varName)
+                end
+            end
+            scriptOutput = scriptOutput .. "\n"
+        elseif element:IsA("TextLabel") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('TextLabel')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.Text = '%s'\n%s.TextColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.TextSize = %d\n%s.TextScaled = false\n%s.ZIndex = %d\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, element.Text,
+                varName, math.floor(element.TextColor3.R * 255), math.floor(element.TextColor3.G * 255), math.floor(element.TextColor3.B * 255),
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.TextSize,
+                varName, varName, element.ZIndex
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n\n", varName, parentVarName)
+        elseif element:IsA("ImageButton") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('ImageButton')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.Image = '%s'\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.ZIndex = %d\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, element.Image,
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.ZIndex
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n\n", varName, parentVarName)
+        elseif element:IsA("ImageLabel") then
+            scriptOutput = scriptOutput .. string.format(
+                "local %s = Instance.new('ImageLabel')\n%s.Size = UDim2.new(%f, %d, %f, %d)\n%s.Position = UDim2.new(%f, %d, %f, %d)\n%s.Rotation = %f\n%s.Image = '%s'\n%s.BackgroundColor3 = Color3.fromRGB(%d, %d, %d)\n%s.BackgroundTransparency = %f\n%s.ZIndex = %d\n",
+                varName, varName,
+                element.Size.X.Scale, element.Size.X.Offset,
+                element.Size.Y.Scale, element.Size.Y.Offset,
+                varName, posXScale, posXOffset, posYScale, posYOffset,
+                varName, element.Rotation or 0,
+                varName, element.Image,
+                varName, math.floor(element.BackgroundColor3.R * 255), math.floor(element.BackgroundColor3.G * 255), math.floor(element.BackgroundColor3.B * 255),
+                varName, element.BackgroundTransparency,
+                varName, element.ZIndex
+            )
+            local uiCorner = element:FindFirstChild("UICorner")
+            if uiCorner then
+                scriptOutput = scriptOutput .. string.format(
+                    "local UICorner = Instance.new('UICorner')\nUICorner.CornerRadius = UDim.new(%f, 0)\nUICorner.Parent = %s\n",
+                    uiCorner.CornerRadius.Scale, varName
+                )
+            end
+            scriptOutput = scriptOutput .. string.format("%s.Parent = %s\n\n", varName, parentVarName)
+        end
+    end
+
+    for _, element in pairs(createdElements) do
+        if element.Parent == ScreenGui then
+            generateElementCode(element, "ScreenGui")
+        end
+    end
+
+    scriptOutput = scriptOutput .. "local function hideFrameAndChildren(frame)\n"
+    scriptOutput = scriptOutput .. "    frame.Visible = false\n"
+    scriptOutput = scriptOutput .. "    local frameChildren = {\n"
+    for parentFrame, children in pairs(frameChildren) do
+        if elementNames[parentFrame] then
+            scriptOutput = scriptOutput .. string.format("        [%s] = {", elementNames[parentFrame])
+            for i, childFrame in pairs(children) do
+                if elementNames[childFrame] then
+                    scriptOutput = scriptOutput .. (i > 1 and ", " or "") .. elementNames[childFrame]
+                end
+            end
+            scriptOutput = scriptOutput .. "},\n"
+        end
+    end
+    scriptOutput = scriptOutput .. "    }\n"
+    scriptOutput = scriptOutput .. "    if frameChildren[frame] then\n"
+    scriptOutput = scriptOutput .. "        for _, childFrame in pairs(frameChildren[frame]) do\n"
+    scriptOutput = scriptOutput .. "            childFrame.Visible = false\n"
+    scriptOutput = scriptOutput .. "        end\n"
+    scriptOutput = scriptOutput .. "    end\n"
+    scriptOutput = scriptOutput .. "end\n\n"
+
+    for button, frame in pairs(buttonBindings) do
+        if elementNames[button] and elementNames[frame] then
+            scriptOutput = scriptOutput .. string.format(
+                "%s.MouseButton1Click:Connect(function()\n    if %s.Visible then\n        hideFrameAndChildren(%s)\n    else\n        %s.Visible = true\n    end\n",
+                elementNames[button], elementNames[frame], elementNames[frame], elementNames[frame]
+            )
+            local scriptCode = buttonScripts[button]
+            if scriptCode and scriptCode ~= "Enter Lua Script Here" and scriptCode ~= "" then
+                scriptOutput = scriptOutput .. "    " .. scriptCode .. "\n"
+            end
+            scriptOutput = scriptOutput .. "end)\n\n"
+        end
+    end
+
+    for button, scriptCode in pairs(buttonScripts) do
+        if (button:IsA("TextButton") or button:IsA("ImageButton")) and not buttonBindings[button] and scriptCode and scriptCode ~= "Enter Lua Script Here" and scriptCode ~= "" then
+            scriptOutput = scriptOutput .. string.format(
+                "%s.MouseButton1Click:Connect(function()\n    %s\nend)\n\n",
+                elementNames[button], scriptCode
+            )
+        end
+    end
+    
+    setclipboard(scriptOutput)
+    CopyScript.Text = "Copied!"
+    wait(1)
+    CopyScript.Text = "Copy Script"
+end)
+
+-- Scrolling Toggle
+ScrollingToggle.MouseButton1Click:Connect(function()
+    if selectedElement and (selectedElement:IsA("Frame") or selectedElement:IsA("ScrollingFrame")) then
+        local index = table.find(createdElements, selectedElement)
+        if index then
+            if selectedElement:IsA("Frame") then
+                local newScrollingFrame = Instance.new("ScrollingFrame")
+                newScrollingFrame.Size = selectedElement.Size
+                newScrollingFrame.Position = selectedElement.Position
+                newScrollingFrame.BackgroundColor3 = selectedElement.BackgroundColor3
+                newScrollingFrame.BackgroundTransparency = selectedElement.BackgroundTransparency
+                newScrollingFrame.ZIndex = selectedElement.ZIndex
+                newScrollingFrame.Rotation = selectedElement.Rotation or 0
+                newScrollingFrame.ScrollBarThickness = 8
+                newScrollingFrame.ScrollingDirection = Enum.ScrollingDirection.Y
+                newScrollingFrame.CanvasSize = UDim2.new(0, 0, 2, 0)
+                newScrollingFrame.Parent = selectedElement.Parent
+                
+                local uiCorner = selectedElement:FindFirstChild("UICorner")
+                if uiCorner then
+                    local newUICorner = Instance.new("UICorner")
+                    newUICorner.CornerRadius = uiCorner.CornerRadius
+                    newUICorner.Parent = newScrollingFrame
+                end
+                
+                for _, child in pairs(selectedElement:GetChildren()) do
+                    if not child:IsA("UICorner") then
+                        child.Parent = newScrollingFrame
+                    end
+                end
+                
+                for button, boundFrame in pairs(buttonBindings) do
+                    if boundFrame == selectedElement then
+                        buttonBindings[button] = newScrollingFrame
+                    end
+                end
+                if frameChildren[selectedElement] then
+                    frameChildren[newScrollingFrame] = frameChildren[selectedElement]
+                    frameChildren[selectedElement] = nil
+                end
+                
+                selectedElement:Destroy()
+                createdElements[index] = newScrollingFrame
+                selectedElement = newScrollingFrame
+                makeDraggable(newScrollingFrame)
+                ScrollingToggle.Text = "Scrolling: On"
+                
+                newScrollingFrame.InputBegan:Connect(function(input)
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                       input.UserInputType == Enum.UserInputType.Touch then
+                        selectElement(newScrollingFrame)
+                    end
+                end)
+            elseif selectedElement:IsA("ScrollingFrame") then
+                local newFrame = Instance.new("Frame")
+                newFrame.Size = selectedElement.Size
+                newFrame.Position = selectedElement.Position
+                newFrame.BackgroundColor3 = selectedElement.BackgroundColor3
+                newFrame.BackgroundTransparency = selectedElement.BackgroundTransparency
+                newFrame.ZIndex = selectedElement.ZIndex
+                newFrame.Rotation = selectedElement.Rotation or 0
+                newFrame.Parent = selectedElement.Parent
+                
+                local uiCorner = selectedElement:FindFirstChild("UICorner")
+                if uiCorner then
+                    local newUICorner = Instance.new("UICorner")
+                    newUICorner.CornerRadius = uiCorner.CornerRadius
+                    newUICorner.Parent = newFrame
+                end
+                
+                for _, child in pairs(selectedElement:GetChildren()) do
+                    if not child:IsA("UICorner") then
+                        child.Parent = newFrame
+                    end
+                end
+                
+                for button, boundFrame in pairs(buttonBindings) do
+                    if boundFrame == selectedElement then
+                        buttonBindings[button] = newFrame
+                    end
+                end
+                if frameChildren[selectedElement] then
+                    frameChildren[newFrame] = frameChildren[selectedElement]
+                    frameChildren[selectedElement] = nil
+                end
+                
+                selectedElement:Destroy()
+                createdElements[index] = newFrame
+                selectedElement = newFrame
+                makeDraggable(newFrame)
+                ScrollingToggle.Text = "Scrolling: Off"
+                
+                newFrame.InputBegan:Connect(function(input)
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                       input.UserInputType == Enum.UserInputType.Touch then
+                        selectElement(newFrame)
+                    end
+                end)
+            end
+        end
+    end
+end)
